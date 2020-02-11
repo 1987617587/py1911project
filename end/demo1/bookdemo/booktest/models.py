@@ -24,8 +24,8 @@ class Book(models.Model):
     title = models.CharField(max_length=20)
     pub_date = models.DateField(default="1989-06-01")
     price = models.FloatField(default=0)
-    # def __str__(self):
-    #     return f"{self.pk}"
+    def __str__(self):
+        return self.title
 
 
 class Hero(models.Model):
@@ -37,11 +37,15 @@ class Hero(models.Model):
     content = models.CharField(max_length=100)
     # book 是一对多中的外键 on_delet 代表删除主表数据时如何做
     book = models.ForeignKey('Book',on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 
 
-
-
+# django ORM关联查询
+# 多方Hero 一方 Book
+# 1.多找一 ,多方对象.关系字段  exp:h1.book.title
+# 2.一找多， 一方对象.小写多方类名_set.all()  exp: b1.hero_set.all()
 
 
 
