@@ -16,13 +16,14 @@ from django.db import models
 # 2.生成迁移文件 用于数据库交互 python mange.py makemigrations
 #    会在对应的应用下方生成迁移文件 不需要关注
 # 3.执行迁移 会在对应的数据库中生成对应的表 python manage.py migrate
+# 模型类更改之后 需要再次生成迁移文件 执行迁移 即重复2，3
 class Book(models.Model):
     """
     Book继承了Model类 因为Model可以操作数据库
     """
     title = models.CharField(max_length=20)
     pub_date = models.DateField(default="1989-06-01")
-
+    # price = models.
     # def __str__(self):
     #     return f"{self.pk}"
 
