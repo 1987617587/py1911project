@@ -27,11 +27,11 @@ class HeroAdmin(ModelAdmin):
     """
     # 更改后端显示列
     list_display = ('name', 'gender', 'book')
-    # 每页显示一个
+    # 每页显示一个 分页会出现在下侧
     list_per_page = 5
-    # 定义搜索字段 （包含标题 价格）
+    # 定义搜索字段 （包含标题 价格） 搜索框会出现在上侧
     search_fields = ('name', 'gender')
-    # 指定过滤字段
+    # 指定过滤字段 过滤框会出现在右侧
     list_filter = ('name', 'gender', 'book')
 
 
@@ -53,5 +53,5 @@ class BookAdmin(ModelAdmin):
     inlines = [HeroInline]
 
 
-admin.site.register(Book,BookAdmin)
-admin.site.register(Hero,HeroAdmin)
+admin.site.register(Book, BookAdmin)
+admin.site.register(Hero, HeroAdmin)
