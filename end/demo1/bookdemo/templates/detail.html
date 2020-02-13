@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+</head>
+<body>
+    <h1>这里是详情页</h1>
+    <div>
+        <h2>书名：{{book.title}}</h2>
+        <h2>价格：{{book.price}}元/本</h2>
+        <h2>出版日期：{{book.pub_date}}</h2>
+        <ul>
+            <h3>书中人物</h3>
+            {% for hero in book.hero_set.all%}
+            <li><h3>{{hero.name}}--{{hero.gender}}</h3></li>
+            {% endfor %}
+
+        </ul>
+    </div>
+    <div>
+        <button><a href="/booktest/index/">返回列表页</a></button>
+
+    </div>
+</body>
+</html>
