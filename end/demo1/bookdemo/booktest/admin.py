@@ -6,5 +6,52 @@ from django.contrib import admin
 # 注册自己需要管理的模型 Book Hero
 from .models import Book,Hero
 
-admin.site.register(Book)
-admin.site.register(Hero)
+
+from django.contrib import admin
+from django.contrib.admin import ModelAdmin
+
+
+class HeroInline(admin.StackedInline):
+    """
+    定义关联类
+
+    """
+    model = Hero
+    extra = 1
+
+
+class HeroAdmin(ModelAdmin):
+    """
+    定义模型管理类
+    通过该类可以修改后台页面
+    """
+    # 更改后端显示列
+    list_display = ('name', 'gender', 'book')
+    # 每页显示一个
+    list_per_page = 5
+    # 定义搜索字段 （包含标题 价格）
+    search_fields = ('name', 'gender')
+    # 指定过滤字段
+    list_filter = ('name', 'gender', 'book')
+
+
+class BookAdmin(ModelAdmin):
+    """
+    定义模型管理类
+    通过该类可以修改后台页面
+    """
+    # 更改后端显示列
+    list_display = ('title','price','pub_date')
+    # 每页显示一个
+    list_per_page = 10
+    # 定义搜索字段 （包含标题 价格）
+    search_fields = ('title','price')
+    # 指定过滤字段
+    list_filter = ('title','price','pub_date')
+
+    # 通过指定关联类进行关联
+    inlines = [HeroInline]
+
+
+admin.site.register(Book,BookAdmin)
+admin.site.register(Hero,HeroAdmin)
