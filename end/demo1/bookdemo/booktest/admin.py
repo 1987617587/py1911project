@@ -41,13 +41,13 @@ class BookAdmin(ModelAdmin):
     通过该类可以修改后台页面
     """
     # 更改后端显示列
-    list_display = ('title','price','pub_date')
+    list_display = ('title','price','pub_date','author')
     # 每页显示一个
     list_per_page = 10
     # 定义搜索字段 （包含标题 价格）
-    search_fields = ('title','price')
+    search_fields = ('title','price','author')
     # 指定过滤字段
-    list_filter = ('title','price','pub_date')
+    list_filter = ('title','price','pub_date','author')
 
     # 通过指定关联类进行关联
     inlines = [HeroInline]

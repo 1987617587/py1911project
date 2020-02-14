@@ -24,6 +24,9 @@ class Book(models.Model):
     title = models.CharField(max_length=20)
     pub_date = models.DateField(default="1989-06-01")
     price = models.FloatField(default=0)
+    # 添加一列 因为已经不为空，需要添加默认值
+
+    author = models.CharField(max_length=20,default='金庸')
     def __str__(self):
         return self.title
 

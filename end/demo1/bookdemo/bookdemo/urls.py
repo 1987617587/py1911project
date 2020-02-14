@@ -41,10 +41,13 @@ urlpatterns = [
     # path('list/', list,),
     # path('json/', json_data,),
     # 多个应用 为了方便管理 1.使用path将booktest的路由 进行包含
-    path('booktest/',include('booktest.urls',))
+    # path('booktest/',include('booktest.urls',)),
+    # 优化 因为只有一个应用 可以省略booktest/
+    path('',include('booktest.urls',namespace='booktest')),
+
 ]
 
 # 项目的所有路由地址配置文件
 # admin路由是django自带的后台管理路由
 
-# 总的路由匹配文件
+# 总的路由匹配文件 == 项目路由文件  使用include包含应用路由文件
