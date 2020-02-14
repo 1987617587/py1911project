@@ -21,13 +21,14 @@
         <li>
             <a href="{% url 'booktest:detail' b.id %}"> {{b.id}}--{{b.title }}--{{b.price }}--{{b.pub_date }}</a>
             <button><a href="{% url 'booktest:delbook' b.id%}">删除</a></button>
+            <button><a href="{% url 'booktest:editbook' b.id%}">修改</a></button>
         </li>
 
         {% endfor%}
 
-<!--        <h2>-->
-<!--            <button><a href="#">添加</a></button>-->
-<!--        </h2>-->
+        <h2>
+            <button><a href="{% url 'booktest:addbook'%}">添加书籍</a></button>
+        </h2>
 
     </div>
 </div>

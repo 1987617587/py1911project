@@ -20,8 +20,12 @@ urlpatterns = [
 
     # 删除功能
     url(r'^delbook/(\d+)/$', views.delbook, name='delbook'),
-    url(r'^delhero(\d+)/$', views.delhero, name='delhero'),
+    url(r'^delhero/(\d+)/$', views.delhero, name='delhero'),
     # 添加英雄
     url(r'^addhero/(\d+)/$', views.addhero, name='addhero'),
+    url(r'^addbook/$', views.addbook, name='addbook'),
+    # 编辑英雄
+    url(r'^edithero/(\d+)/$', views.edithero, name='edithero'),
+    url(r'^editbook/(\d+)/$', views.editbook, name='editbook'),
 
 ]

@@ -83,6 +83,53 @@ def addhero(request,bookid):
         h.save()
         url = reverse("booktest:detail", args=(bookid,))
         return redirect(to=url)
-    # if request
 
-    # pass
+def addbook(request):
+    if request.method == 'GET':
+        return render(request,'addbook.html')
+    elif request.method == 'POST':
+        b = Book()
+        b.title =request.POST.get("title")
+        print(b.title)
+        b.price =request.POST.get("price")
+        # h.gender = True
+        b.pub_date = request.POST.get("pub_date")
+
+        b.save()
+        url = reverse("booktest:index")
+        return redirect(to=url)
+
+
+def edithero(request,heroid):
+    hero = Hero.objects.get(id = heroid)
+    print(hero)
+    # 使用get方法进入英雄的编辑页面
+    if request.method == 'GET':
+        return render(request,"edithero.html",{'hero':hero})
+    elif request.method == 'POST':
+        hero.name = request.POST.get("heroname")
+        hero.gender = request.POST.get("sex")
+        hero.content = request.POST.get("content")
+        hero.save()
+        # 注意数组类型 不加，会报类型错误的
+        url = reverse('booktest:detail',args=(hero.book.id,))
+        return redirect(to=url)
+
+
+def editbook(request,bookid):
+    book = Book.objects.get(id = bookid)
+    print(book)
+    print(book.pub_date)
+    book.pub_date = str(book.pub_date)
+    print(type(book.pub_date))
+    # 使用get方法进入英雄的编辑页面
+    if request.method == 'GET':
+        return render(request,"editbook.html",{'book':book})
+    elif request.method == 'POST':
+        book.name = request.POST.get("title")
+        book.price = request.POST.get("price")
+        book.pub_date = request.POST.get("pub_date")
+        book.save()
+        # 注意数组类型 不加，会报类型错误的
+        url = reverse('booktest:index')
+        return redirect(to=url)

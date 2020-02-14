@@ -18,6 +18,7 @@
         <h3>
             <li>{{hero.name}}--{{hero.gender}}
                 <button><a href="{%url 'booktest:delhero' hero.id %}">删除英雄</a></button>
+                <button><a href="{%url 'booktest:edithero' hero.id %}">编辑英雄</a></button>
             </li>
         </h3>
         {% endfor %}
