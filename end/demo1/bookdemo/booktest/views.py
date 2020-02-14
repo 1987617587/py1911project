@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,reverse
 from django.template import loader
 from .models import Book,Hero
 # Create your views here.
@@ -6,7 +6,7 @@ from .models import Book,Hero
 
 # MVT V视图模块
 # 在此处接受请求 处理数据 返回响应
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 # 3.在views.py中编写视图函数
 def index(request):
 
@@ -45,3 +45,44 @@ def detail(request,b_id):
 
 def about(request):
     return HttpResponse("这里是关于页")
+
+
+def delbook(request,bookid):
+    book = Book.objects.get(id = bookid)
+    book.delete()
+    # return HttpResponse("删除成功")
+    # return HttpResponseRedirect(redirect_to='/booktest/'+bookid)
+    # return HttpResponseRedirect(redirect_to='/')
+    # return redirect(to='/')
+
+    # 在
+    url = reverse('booktest:index')
+    return redirect(to=url)
+
+
+def delhero(request,heroid):
+    hero = Hero.objects.get(id=heroid)
+    # 一定要先获取在删除
+    bookid = hero.book.id
+    hero.delete()
+    url = reverse("booktest:detail",args=(bookid,))
+    return redirect(to=url)
+
+def addhero(request,bookid):
+    print(bookid)
+    if request.method == 'GET':
+        return render(request,'addhero.html')
+    elif request.method == 'POST':
+        h = Hero()
+        h.name =request.POST.get("heroname")
+        print(h.name)
+        h.gender =request.POST.get("sex")
+        # h.gender = True
+        h.content = request.POST.get("content")
+        h.book = Book.objects.get(id = bookid)
+        h.save()
+        url = reverse("booktest:detail", args=(bookid,))
+        return redirect(to=url)
+    # if request
+
+    # pass

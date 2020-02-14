@@ -14,16 +14,21 @@
         </div>
         <h2>所有的书籍共({{books.count}})本</h2>
         {% for b in books%}
-<!--        <a href="/booktest/detail/{{b.id}}/">下面是优化-->
-<!--        <a href="/detail/{{b.id}}/">-->
+        <!--        <a href="/booktest/detail/{{b.id}}/">下面是优化-->
+        <!--        <a href="/detail/{{b.id}}/">-->
         {# 高级注释 提高性能#}
-        <a href="{% url 'booktest:detail' b.id %}">
-            <li>
-                {{b.id}}--{{b.title }}--{{b.price }}--{{b.pub_date }}
-            </li>
-        </a>
+
+        <li>
+            <a href="{% url 'booktest:detail' b.id %}"> {{b.id}}--{{b.title }}--{{b.price }}--{{b.pub_date }}</a>
+            <button><a href="{% url 'booktest:delbook' b.id%}">删除</a></button>
+        </li>
 
         {% endfor%}
+
+<!--        <h2>-->
+<!--            <button><a href="#">添加</a></button>-->
+<!--        </h2>-->
+
     </div>
 </div>
 

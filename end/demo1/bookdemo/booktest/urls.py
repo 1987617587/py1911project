@@ -17,4 +17,11 @@ urlpatterns = [
     # 使用正则分组 (\d+) 将正则分组匹配到的内容作为实参传递给视图函数
     url(r'^detail/(\d+)/$',views.detail,name='detail'),
     # url(r'^detail/([0-9]+)/$', views.detail),
+
+    # 删除功能
+    url(r'^delbook/(\d+)/$', views.delbook, name='delbook'),
+    url(r'^delhero(\d+)/$', views.delhero, name='delhero'),
+    # 添加英雄
+    url(r'^addhero/(\d+)/$', views.addhero, name='addhero'),
+
 ]
