@@ -120,7 +120,8 @@ def editbook(request,bookid):
     book = Book.objects.get(id = bookid)
     print(book)
     print(book.pub_date)
-    book.pub_date = str(book.pub_date)
+    # book.pub_date = str(book.pub_date)
+    book.pub_date = book.pub_date.strftime("%Y-%m-%d")
     print(type(book.pub_date))
     # 使用get方法进入英雄的编辑页面
     if request.method == 'GET':
