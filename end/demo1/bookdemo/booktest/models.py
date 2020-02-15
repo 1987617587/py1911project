@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 
@@ -86,3 +88,39 @@ class User(models.Model):
         ordering = ["id"]
         verbose_name = "用户模型类A"
         verbose_name_plural = "用户模型类B"
+
+
+# 一对一  一方Account 实例a  一方Concact实列c
+# a找c  a.concact
+# c找a  a.account
+class Account(models.Model):
+    username = models.CharField(max_length=20,verbose_name="用户名")
+    password = models.CharField(max_length=20,verbose_name="密码")
+    regist_date = models.DateField(auto_now_add=True,verbose_name="注册日期")
+    # 一对一可以在任意一方关联
+    # account = models.OneToOneField('Concact',on_delete=models.CASCADE)
+
+class Concact(models.Model):
+    telephone = models.CharField(max_length=11,verbose_name="手机号")
+    email = models.EmailField(default="1711960368@qq.com")
+    # account = models.OneToOneField(Account,on_delete=models.CASCADE)
+    account = models.OneToOneField(Account,on_delete=models.CASCADE,related_name="con")
+
+
+# 多对多  多方Article 实例a 多方Tag 实例t 关系字段定义在任意一方
+# 添加关系 t.articles.add(a) 删除t.acticles.remove(a)
+# 查询 a.tag_set.all()    t.acticles.all()
+
+class Article(models.Model):
+
+    title = models.CharField(max_length=20,verbose_name="标题")
+    sumary = models.TextField(verbose_name="正文")
+
+class Tag(models.Model):
+    name = models.CharField(max_length=10,verbose_name="标签名")
+    # 未重命名查询 a.tag_set.all()    t.acticles.all()
+    # acticles = models.ManyToManyField(Article)
+    # 重命名查询 a.tags.all()    t.acticles.all()
+    acticles = models.ManyToManyField(Article,related_name="tags")
+
+

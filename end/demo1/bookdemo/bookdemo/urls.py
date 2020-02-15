@@ -43,7 +43,8 @@ urlpatterns = [
     # 多个应用 为了方便管理 1.使用path将booktest的路由 进行包含
     # path('booktest/',include('booktest.urls',)),
     # 优化 因为只有一个应用 可以省略booktest/
-    path('',include('booktest.urls',namespace='booktest')),
+    # path('',include('booktest.urls',namespace='booktest')),
+    path('',include('polls.urls',namespace='polls')),
 
 ]
 

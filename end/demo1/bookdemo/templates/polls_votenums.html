@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>票数详情</title>
+</head>
+<body>
+<h1>当前票数</h1>
+{{problem}}
+{% for option in problem.problems.all %}
+<br>
+
+{{option.option1}}--{{problem.option1_votes}}
+<br>
+{{option.option2}}--{{problem.option2_votes}}
+<br>
+{% if problem.option3_votes %}
+{{option.option3}}--{{problem.option3_votes}}
+{% endif %}
+<br>
+{% if problem.option4_votes %}
+{{option.option4}}--{{problem.option4_votes}}
+{% endif %}
+
+{% endfor %}
+<button><a href="{%url 'polls:index' %}">返回首页</a></button>
+</body>
+</html>
