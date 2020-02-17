@@ -25,10 +25,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5z1pqws!m_liy&1$a0(a)_*z0b^e0z-r2la05k)vkd-7wq05ld'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# 调试模式
 DEBUG = True
+# 关闭调试模式，可以看到404
+# DEBUG = False
+# 如果关闭调试模式 ALLOWED_HOSTS 代表哪些域名ip或电脑可以访问服务
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -42,6 +45,8 @@ INSTALLED_APPS = [
     # 想要使用应用中的模型类 需要注册该应用
     'booktest',
     'polls',
+    'vote',
+    'download',
 
 ]
 

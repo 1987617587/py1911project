@@ -21,6 +21,18 @@ def index(request):
     # return HttpResponse(result)
 
     # 快捷方式 (将上面3步简化操作)
+    # print("_____________________")
+    # print(request)
+    # print("__________path___________")
+    # print(request.path)
+    # print("__________method___________")
+    # print(request.method)
+    # print("__________GET___________")
+    # print(request.GET)
+    # print("_________POST____________")
+    # print(request.POST)
+    # print("_________FILES____________")
+    # print(request.FILES)
     books = Book.objects.all()
     return render(request,'index.html',{'books':books})
 
@@ -29,6 +41,7 @@ def list(request):
 
 
 def detail(request,b_id):
+# def detail(request,abc):
     # # return HttpResponse(f"这里{b_id}书是详情页")
     # # 1.获取模板
     # template = loader.get_template('detail.html')

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>这是首页</h1>
+    <h1>这是项目首页</h1>
     <div>
         <div class="center">
             <img src="/static/img/2.png" alt="">
@@ -28,6 +28,11 @@
 
         <h2>
             <button><a href="{% url 'booktest:addbook'%}">添加书籍</a></button>
+            <button><a href="{% url 'polls:index'%}">进入投票1</a></button>
+            <button><a href="{% url 'vote:index'%}">进入投票2</a></button>
+            <button><a href="http://127.0.0.1:8000/download/require.txt">下载1</a></button>
+            <button><a href="http://127.0.0.1:8000/download/templates/1.txt">下载2</a></button>
+            <button><a href="http://127.0.0.1:8000/download/./require.txt">下载3</a></button>
         </h2>
 
     </div>

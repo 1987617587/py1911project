@@ -16,7 +16,7 @@ urlpatterns = [
     # 以^开始，以$结束 更加严谨
     # 使用正则分组 (\d+) 将正则分组匹配到的内容作为实参传递给视图函数
     url(r'^detail/(\d+)/$',views.detail,name='detail'),
-    # url(r'^detail/([0-9]+)/$', views.detail),
+    # url(r'^detail/(?P<abc>\d+)/$', views.detail),
 
     # 删除功能
     url(r'^delbook/(\d+)/$', views.delbook, name='delbook'),
