@@ -140,4 +140,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR),"static"]
 
 # 使用django自带的用户类 配置信息
 
-# AUTH_USER_MODEL = 'vote.User'
+AUTH_USER_MODEL = 'vote.User'

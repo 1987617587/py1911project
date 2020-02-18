@@ -3,14 +3,39 @@
 <head>
     <meta charset="UTF-8">
     {% block Title %}
-        <title>模板</title>
+    <title>Title</title>
     {% endblock %}
-
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
+
 <body>
-    {% block body %}
-    这是body
+<div class="container">
+    {% block header %}
+    {# 这里是头部 #}
+    <div class="">
+        {% if request.user and request.user.username != ''%}
+        当前用户：{{request.user}}
+        <button><a href="{% url 'vote:loginout' %}">退出</a></button>
+
+        {% else %}
+        <button><a href="{% url 'vote:login' %}">登录</a></button>
+        <button><a href="{% url 'vote:regist' %}">注册</a></button>
+        {% endif %}
+
+
+    </div>
     {% endblock %}
 
+    {% block body %}
+    <br>
+    这里是身体
+    {% endblock %}
+
+    {% block footer %}
+    <br>
+    {# 这里是底部 #}
+    <button><a href="{% url 'booktest:index' %}">返回主页面</a></button>
+    {% endblock %}
+</div>
 </body>
 </html>
