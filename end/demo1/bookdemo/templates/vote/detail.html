@@ -11,9 +11,9 @@
         {% csrf_token %}
         {% for option in problem.problems.all %}
         {% if forloop.counter == 1 %}
-        <input type="radio" name="option" value="{{forloop.counter}}" checked>{{option}}
+        <input type="radio" name="option" value="{{option.id}}" checked>{{option}}
         {% else %}
-        <input type="radio" name="option" value="{{forloop.counter}}">{{option}}
+        <input type="radio" name="option" value="{{option.id}}">{{option}}
         {% endif %}
         {% endfor %}
         <input type="submit" value="投票">

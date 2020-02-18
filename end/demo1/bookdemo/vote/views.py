@@ -30,7 +30,12 @@ def login(request):
         if user:
             # 认证成功 生成cookie
             lin(request, user)
-            url = reverse("vote:index")
+            # 检验以下 来（登录）之前有没有准备进入详情页
+            next_url = request.GET.get("next")
+            if next_url:
+                url = next_url
+            else:
+                url = reverse("vote:index")
             return redirect(to=url)
         else:
             url = reverse("vote:login")
@@ -90,14 +95,35 @@ def index(request):
 
 def detail(request, problemid):
     if request.method == 'GET':
-        try:
-            problem = Problem.objects.get(id=problemid)
-            # print(problem.option.all)
-            return render(request, 'vote/detail.html', {'problem': problem})
-        except EnvironmentError as e:
-            print(e)
+        # 看看当前用户是谁
+        print("当前用户",request.user.username)
+        if request.user and request.user.username != "":
+            # 已经登录
+            print(request.user.problems)
+            print(type(request.user.problems))
+            try:
+                problem = Problem.objects.get(id=problemid)
+                print(request.user.problems.all())
+                # 检验是否已经投票（查询用户是否已经和该问题关联）
+                if problem in request.user.problems.all():
+                    print("已经投过票了，直接进入结果页")
+                    url = reverse("vote:result", args=(problemid))
+                    return redirect(to=url)
+                else:
+                    print("可以投票，进入详情页")
+                    return render(request, 'vote/detail.html', {'problem': problem})
+            except EnvironmentError as e:
+                print(e)
 
-            return HttpResponse("问题不合法！")
+                return HttpResponse("问题不合法！")
+        else:
+            print("未登录")
+            # 此时虽然未登录 但是用户可能已经浏览到一些信息，希望进入详情，却被路由守卫阻拦
+            # 那么登录之后，也该人性化，进入用户之前准备进入的详情页
+            # 只需要在后面用next 拼接上准备进入的路由地址,然后在登录之后执行跳转
+            url = reverse("vote:login")+"?next=/vote/detail/"+problemid+"/"
+            return redirect(to=url)
+
     elif request.method == 'POST':
         try:
             print(request.POST.get("option"))
@@ -106,6 +132,8 @@ def detail(request, problemid):
             print(option)
             option.votenums += 1
             option.save()
+            # 关联用户和问题  （关联之后方便查询是否已经投票）
+            request.user.problems.add(Problem.objects.get(id=problemid))
 
             # return HttpResponse("投票成功")
             url = reverse("vote:result",args=(problemid,))
