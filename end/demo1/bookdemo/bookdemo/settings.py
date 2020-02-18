@@ -54,7 +54,8 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 想要打开 需要在post请求时加入{% csrf_token %}
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -135,3 +136,8 @@ STATIC_URL = '/static/'
 
 # 需要配置静态文件 所处位置
 STATICFILES_DIRS = [os.path.join(BASE_DIR),"static"]
+
+
+# 使用django自带的用户类 配置信息
+
+# AUTH_USER_MODEL = 'vote.User'
