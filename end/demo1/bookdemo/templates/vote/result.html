@@ -1,0 +1,17 @@
+{% extends "vote/base.html" %}
+{% block Title %}
+<title>具体票数</title>
+
+{% endblock %}
+{% block body %}
+<div class="container">
+    <h3>具体票数</h3>
+    {% for option in problem.problems.all %}
+    {{option}}:{{option.votenums}}
+    <br>
+    {% endfor %}
+    <button><a href="{% url 'vote:index' %}">返回</a></button>
+
+</div>
+{% endblock %}
+
