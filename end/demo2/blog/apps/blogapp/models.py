@@ -11,6 +11,9 @@ class Ads(models.Model):
 
     desc = models.CharField(max_length=20, null=True, blank=True, verbose_name="图片描述")
 
+    def __str__(self):
+        return self.desc
+
     class Mate:
         verbose_name = "图片表"
 
@@ -61,6 +64,9 @@ class Comment(models.Model):
     body = models.TextField(verbose_name="评论内容")
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="评论时间")
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="所属文章")
+
+    def __str__(self):
+        return self.name
 
     class Mate:
         verbose_name = "评论表"
