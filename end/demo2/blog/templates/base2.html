@@ -1,38 +1,33 @@
 {% extends 'base.html' %}
+{% load myfun %}
 {% block Title %}
 <title>继承base</title>
 {% endblock %}
 {% block main %}
-
 {% endblock %}
 {% block aside %}
 <aside class="col-md-4">
     <div class="widget widget-recent-posts">
         <h3 class="widget-title">最新文章</h3>
+        {% get_latest_articles as latest_articles %}
+
         <ul>
+            {% for article in latest_articles %}
             <li>
-                <a href="#">Django 博客开发入门教程：前言</a>
+                <a href="{% url 'blogapp:detail' article.id %}">{{article.title}}</a>
             </li>
-            <li>
-                <a href="#">Django 博客使用 Markdown 自动生成文章目录</a>
-            </li>
-            <li>
-                <a href="#">部署 Django 博客</a>
-            </li>
+            {% endfor %}
         </ul>
     </div>
     <div class="widget widget-archives">
         <h3 class="widget-title">归档</h3>
+        {% get_latest_dates as latest_dates %}
         <ul>
+            {% for date in latest_dates %}
             <li>
-                <a href="#">2017 年 5 月</a>
+                <a href="?type=date&year={{date.year}}&month={{date.month}}">{{date.year}} 年 {{date.month}}月</a>
             </li>
-            <li>
-                <a href="#">2017 年 4 月</a>
-            </li>
-            <li>
-                <a href="#">2017 年 3 月</a>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 
