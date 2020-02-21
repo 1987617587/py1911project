@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,reverse
 from django.http import HttpResponse
+
+from blogapp.forms import CommentForm
 from .models import *
 # 分页和分页器
 from django.core.paginator import Page, Paginator
@@ -11,11 +13,25 @@ def index(request):
     # return HttpResponse("首页")
     ads = Ads.objects.all()
     type_page = request.GET.get("type")
-    year,month = None,None
+    year, month, category_id = None, None, None
     if type_page == "date":
         year = request.GET.get("year")
         month = request.GET.get("month")
         articles = Article.objects.filter(create_time__year=year, create_time__month=month).order_by("-create_time")
+    elif type_page == "category":
+        category_id = request.GET.get("category_id")
+        try:
+            category = Category.objects.get(id=category_id)
+            articles = category.article_set.all()
+        except:
+            return HttpResponse("标签不合法！")
+    elif type_page == "tag":
+        tag_id = request.GET.get("tag_id")
+        try:
+            tag = Tag.objects.get(id=tag_id)
+            articles = tag.article_set.all()
+        except:
+            return HttpResponse("标签不合法！")
     else:
         articles = Article.objects.all()
 
@@ -26,12 +42,42 @@ def index(request):
     paginator = Paginator(articles, 2)
     num = request.GET.get("pagenum", 1)
     page = paginator.get_page(num)
-    return render(request, 'index.html', {"ads": ads, "page": page,'type':type_page,"year":year,"month":month})
+    return render(request, 'index.html', locals())
+
+    # return render(request, 'index.html', {"ads": ads, "page": page,'type':type_page,"year":year,"month":month})
+
 
 
 def detail(request, articleid):
     # return HttpResponse("详情")
-    return render(request, 'single.html')
+    if request.method == "GET":
+        try:
+            article = Article.objects.get(id=articleid)
+            cf = CommentForm()
+            return render(request, 'single.html', locals())
+        except:
+            return HttpResponse("查无此书")
+    else:
+        cf = CommentForm(request.POST)
+        if cf.is_valid():
+            # 此时cf是一个表单，不是实例
+            # cf.article = Article.objects.get(id=articleid)
+            # 保存前对commit默认值修改为False  comment就是实例了
+            comment = cf.save(commit=False)
+            comment.article = Article.objects.get(id=articleid)
+            comment.save()
+
+            url = reverse("blogapp:detail", args=(articleid,))
+            return redirect(to=url)
+
+        else:
+            article = Article.objects.get(id=articleid)
+            cf = CommentForm()
+            errors = "输入格式有误！"
+            return render(request, 'single.html', locals())
+
+
+
 
 
 def contact(request):

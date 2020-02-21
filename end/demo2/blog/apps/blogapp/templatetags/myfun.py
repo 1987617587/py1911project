@@ -1,5 +1,5 @@
 from django.template import Library
-from ..models import Article
+from ..models import Article, Category,Tag
 
 # 编译过滤器
 register = Library()
@@ -12,7 +12,7 @@ def date_format(date):
 
 
 @register.filter
-def auther_format(author, info):
+def author_format(author, info):
     return info + ":" + author.upper()
 
 
@@ -24,3 +24,14 @@ def get_latest_articles(num=3):
 @register.simple_tag
 def get_latest_dates(num=3):
     return Article.objects.dates("create_time", 'month', "DESC")[:num]
+
+
+@register.simple_tag
+def get_categorys():
+    return Category.objects.all().order_by("id")[::]
+
+
+
+@register.simple_tag
+def get_tags():
+    return Tag.objects.all().order_by("id")[::]
