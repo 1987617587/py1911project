@@ -2,6 +2,16 @@ from django.db import models
 
 # Create your models here.
 from DjangoUeditor.models import UEditorField
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    """
+    用户类
+
+    """
+    telephone = models.CharField(max_length=11, verbose_name="手机号")
+    curriculum = models.ManyToManyField("Curriculum")
 
 
 class Ads(models.Model):
@@ -23,7 +33,9 @@ class Category(models.Model):
 
 
 class Curriculum(models.Model):
-    name = models.CharField(max_length=20, verbose_name="教师姓名")
+    name = models.CharField(max_length=20, verbose_name="课程名")
+    introduce = models.CharField(max_length=120, verbose_name="课程介绍")
+    img = models.ImageField(upload_to="imgs", verbose_name="课程图片")
     category = models.ManyToManyField(Category, verbose_name="授课分类")
     price = models.PositiveIntegerField(default=1000, verbose_name="课程费用")
     days = models.PositiveIntegerField(default=7, verbose_name="课程时长")

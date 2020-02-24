@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>训训网</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<!--标志搜索-->
+
+
+<div class="log_bg overflow clearfix">
+  <div class="wrapp overflow pt35">
+    <p class="fl overflow"><img src="images/index_r2_c6.jpg" /></p>
+    <dl class="fl pl90 pt10 overflow w515 ">
+      <dt>
+        <input type="text" class="ss_in" value="请输入关键字" onfocus="if(this.value=='请输入关键字'){this.value='';this.style.color='#333'}" onblur="if(this.value==''){this.value='请输入关键字';this.style.color='#aaa'}" x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword" />
+        <input type="button" class="an_bg" />
+      </dt>
+      <dd> <a href="#" class="f12 huise">管理提升培训</a> <a href="#" class="f12 huise">技术技能培训</a> <a href="#" class="f12 huise">资格认证培训</a> <a href="#" class="f12 huise">会计金融培训</a> </dd>
+    </dl>
+    <!--发布登录-->
+    <dl class="w336 overflow  pt10 fr">
+      <dt> <a href="#"><img src="images/index_r4_c33.jpg" class="fl" /></a>
+        <ol class="f18 fr overflow">
+          <a href="#">登录</a> | <a href="#" class="red">注册</a>
+        </ol>
+      </dt>
+      <dd  > <img src="images/index_r6_c31.jpg" /> </dd>
+    </dl>
+  </div>
+</div>
+
+<!--nav-->
+
+
+<div class="nav_bg overflow  clearfix" id ="inner">
+  <div class="wrappp">
+    <ul>
+      <li style="background:none"><a href="#">首页 </a></li>
+      <li><a href="#">培训信息 </a></li>
+      <li><a href="#">会议信息 </a></li>
+      <li><a href="#">训训专家库 </a></li>
+      <li><a href="#">训训云课堂 </a></li>
+      <li><a href="#">训训大讲堂 </a></li>
+      <li><a href="#">免费公开课 </a></li>
+      <li><a href="#">培训机构 </a></li>
+      <li><a href="#">项目路演 </a></li>
+      <li><a href="#">会议培训场地 </a></li>
+      <li><a href="#">人才招聘 </a></li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+var obj11 = document.getElementById("inner");
+var top11 = getTop(obj11);
+var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+ 
+	var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (bodyScrollTop > top11){
+		obj11.style.position = (isIE6) ? "absolute" : "fixed";
+		obj11.style.top = (isIE6) ? bodyScrollTop + "px" : "0px";
+	} else {
+		obj11.style.position = "static";
+	}
+}
+function getTop(e){
+ 
+	var offset = e.offsetTop;
+	if(e.offsetParent != null) offset += getTop(e.offsetParent);
+	return offset;
+}
+</script>
+<!--js-->
+<div class="index_show">
+	<ul class="bxslider" id="index-bxslider">
+		<li class="item1" style="background: url(images/02.jpg) center 0 no-repeat;"></li>
+		<li class="item2" style="background: url(images/03.jpg) center 0 no-repeat;"></li>
+		<li class="item3" style="background: url(images/04.jpg) center 0 no-repeat;"></li>
+        <li class="item4" style="background: url(images/05.jpg) center 0 no-repeat;"></li>
+        <li class="item5" style="background: url(images/06.jpg) center 0 no-repeat;"></li>
+	</ul>
+	<div id="bx-pager">
+		<a data-slide-index="0" href="javascript:void(0);">01</a>
+		<a data-slide-index="1" href="javascript:void(0);">02</a>
+		<a data-slide-index="2" href="javascript:void(0);">03</a>
+        <a data-slide-index="3" href="javascript:void(0);">04</a>
+		<a data-slide-index="4" href="javascript:void(0);">05</a>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/jQuery.v1.8.3-min.js"></script>
+<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="js/zzsc.js"></script>
+<!--路径-->
+<div class="wrapp pt10 overflow clearfix f18 l-35">
+ <p class="fl"><img src="images/t.jpg"  class="fl pt15 pr10"/> <a href="#">首页</a> > <em class="red">培训信息</em></p>
+</div>
+<!--分类-->
+
+ <div class=" px_li  mt15 overflow clearfix  mb10 ">
+ <dl>
+  <dt>产品分类</dt>
+  <dd>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+  </dd>
+ </dl>
+  <dl>
+  <dt>产品分类</dt>
+  <dd>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+   <a href="#">郑州</a>
+   <a href="#">二七区</a>
+  </dd>
+ </dl>
+ <dl>
+ <dt>产品分类</dt>
+  <dd>
+   <a href="#">200</a>
+   <a href="#">6000</a>
+    <a href="#">200</a>
+   <a href="#">6000</a>
+  </dd>
+ </dl>
+ <dl>
+ <dt>产品分类</dt>
+  <dd>
+   <a href="#">五星/豪华</a>
+   <a href="#">三星/档次</a>
+    <a href="#">五星/豪华</a>
+   <a href="#">三星/档次</a>
+  </dd>
+ </dl>
+ <dl>
+ <dt>产品分类</dt>
+  <dd>
+   <a href="#">0-200平</a>
+   <a href="#">0-200平</a>
+   <a href="#">0-200平</a>
+  </dd>
+ </dl>
+</div>    
+      
+<!--会议培训-->
+<div class="liveCourse wrapp clearfix ">
+			
+            <ul id="imgCont" class="liveList clearfix">
+                <li>
+                    <a target="_blank" href="#">
+                        <img class="liveImg" src="images/45232_img0.jpg">
+                        <div class="mask">
+	                    <!-- 二维码图片 -->
+	                        <img src="images/45232_code0.jpg" class="liveCode">
+	                        <div class="maskRight">
+	                            <p>微信扫一扫</p>
+	                            <p>手机看直播</p>
+	                        </div>
+	                    </div>
+                        <p class="liveTitle tl">我的孩子是如何考上哈佛的</p>
+                        <p class="liveTime tl">2016年5月28日 &nbsp;14:00</p>
+                        <div class="logoBox clearfix w100"> 
+                          <ol class="fr pt15">已报名:<em class="red">800</em></ol>
+                        	<!-- logo图片大小为36*36 -->
+                            <img class="liveLogo" src="images/feichuguo_logo.png ">	
+                            <span class="liveName">飞出国</span>
+                            
+                        </div>                                
+                    </a>
+                </li>
+               <li>
+                    <a target="_blank" href="#">
+                        <img class="liveImg" src="images/45232_img0.jpg">
+                        <div class="mask">
+	                    <!-- 二维码图片 -->
+	                        <img src="images/45232_code0.jpg" class="liveCode">
+	                        <div class="maskRight">
+	                            <p>微信扫一扫</p>
+	                            <p>手机看直播</p>
+	                        </div>
+	                    </div>
+                        <p class="liveTitle tl">我的孩子是如何考上哈佛的</p>
+                        <p class="liveTime tl">2016年5月28日 &nbsp;14:00</p>
+                        <div class="logoBox clearfix w100"> 
+                          <ol class="fr pt15">已报名:<em class="red">800</em></ol>
+                        	<!-- logo图片大小为36*36 -->
+                            <img class="liveLogo" src="images/feichuguo_logo.png ">	
+                            <span class="liveName">飞出国</span>
+                            
+                        </div>                                
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="#">
+                        <img class="liveImg" src="images/45232_img0.jpg">
+                        <div class="mask">
+	                    <!-- 二维码图片 -->
+	                        <img src="images/45232_code0.jpg" class="liveCode">
+	                        <div class="maskRight">
+	                            <p>微信扫一扫</p>
+	                            <p>手机看直播</p>
+	                        </div>
+	                    </div>
+                        <p class="liveTitle tl">我的孩子是如何考上哈佛的</p>
+                        <p class="liveTime tl">2016年5月28日 &nbsp;14:00</p>
+                        <div class="logoBox clearfix w100"> 
+                          <ol class="fr pt15">已报名:<em class="red">800</em></ol>
+                        	<!-- logo图片大小为36*36 -->
+                            <img class="liveLogo" src="images/feichuguo_logo.png ">	
+                            <span class="liveName">飞出国</span>
+                            
+                        </div>                                
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="#">
+                        <img class="liveImg" src="images/45232_img0.jpg">
+                        <div class="mask">
+	                    <!-- 二维码图片 -->
+	                        <img src="images/45232_code0.jpg" class="liveCode">
+	                        <div class="maskRight">
+	                            <p>微信扫一扫</p>
+	                            <p>手机看直播</p>
+	                        </div>
+	                    </div>
+                        <p class="liveTitle tl">我的孩子是如何考上哈佛的</p>
+                        <p class="liveTime tl">2016年5月28日 &nbsp;14:00</p>
+                        <div class="logoBox clearfix w100"> 
+                          <ol class="fr pt15">已报名:<em class="red">800</em></ol>
+                        	<!-- logo图片大小为36*36 -->
+                            <img class="liveLogo" src="images/feichuguo_logo.png ">	
+                            <span class="liveName">飞出国</span>
+                            
+                        </div>                                
+                    </a>
+                </li>
+            </ul>
+		</div>
+        
+      
+      <div class="youthModel wrapp clearfix overflow">
+			
+			<ul class="modelList">
+				<li class="clearfix">
+					<a target="_blank" class="modelImg" href="#"><img src="images/martians_club.jpg"></a>
+					<div class="modelRight tl">
+						<a target="_blank" class="modelTitle" href="#">让科学成为兴趣</a>
+						<div class="modelIntro tl">火星人俱乐部是一个科学俱乐部，致力于中国青少年的现代科学教育。成立于2014年，由一支来自北大、清华的青年团队创办，老师均来自于北大、清华、中科院等高校的物理学、电子学、计算机软件等专业的博士研究生。
+                        </div>
+                        <div class="w100 clearfix">
+                         <ol class="fr pt5">已报名:<em class="red">800</em></ol>
+                        </div>
+                         <div class="w100 pt5 overflow clearfix tl">
+                         时间：2016-06-20 &nbsp; &nbsp; &nbsp; &nbsp; 地点：河南牧业经济学员2楼1205楼
+                        </div>
+					</div>
+				</li>
+				<li class="clearfix">
+					<a target="_blank" class="modelImg" href="#"><img src="images/martians_club.jpg"></a>
+					<div class="modelRight tl">
+						<a target="_blank" class="modelTitle" href="#">让科学成为兴趣</a>
+						<div class="modelIntro tl">火星人俱乐部是一个科学俱乐部，致力于中国青少年的现代科学教育。成立于2014年，由一支来自北大、清华的青年团队创办，老师均来自于北大、清华、中科院等高校的物理学、电子学、计算机软件等专业的博士研究生。
+                        </div>
+                       <div class="w100 clearfix">
+                         <ol class="fr pt5">已报名:<em class="red">800</em></ol>
+                        </div>
+                         <div class="w100 pt5 overflow clearfix tl">
+                         时间：2016-06-20 &nbsp; &nbsp; &nbsp; &nbsp; 地点：河南牧业经济学员2楼1205楼
+                        </div>
+					</div>
+				</li>
+                <li class="clearfix">
+					<a target="_blank" class="modelImg" href="#"><img src="images/martians_club.jpg"></a>
+					<div class="modelRight tl">
+						<a target="_blank" class="modelTitle" href="#">让科学成为兴趣</a>
+						<div class="modelIntro tl">火星人俱乐部是一个科学俱乐部，致力于中国青少年的现代科学教育。成立于2014年，由一支来自北大、清华的青年团队创办，老师均来自于北大、清华、中科院等高校的物理学、电子学、计算机软件等专业的博士研究生。
+                        </div>
+                       <div class="w100 clearfix">
+                         <ol class="fr pt5">已报名:<em class="red">800</em></ol>
+                        </div>
+                         <div class="w100 pt5 overflow clearfix tl">
+                         时间：2016-06-20 &nbsp; &nbsp; &nbsp; &nbsp; 地点：河南牧业经济学员2楼1205楼
+                        </div>
+					</div>
+				</li>
+                <li class="clearfix">
+					<a target="_blank" class="modelImg" href="#"><img src="images/martians_club.jpg"></a>
+					<div class="modelRight tl">
+						<a target="_blank" class="modelTitle" href="#">让科学成为兴趣</a>
+						<div class="modelIntro tl">火星人俱乐部是一个科学俱乐部，致力于中国青少年的现代科学教育。成立于2014年，由一支来自北大、清华的青年团队创办，老师均来自于北大、清华、中科院等高校的物理学、电子学、计算机软件等专业的博士研究生。
+                        </div>
+                       <div class="w100 clearfix">
+                         <ol class="fr pt5">已报名:<em class="red">800</em></ol>
+                        </div>
+                         <div class="w100 pt5 overflow clearfix tl">
+                         时间：2016-06-20 &nbsp; &nbsp; &nbsp; &nbsp; 地点：河南牧业经济学员2楼1205楼
+                        </div>
+					</div>
+				</li>
+                <li class="clearfix">
+					<a target="_blank" class="modelImg" href="#"><img src="images/martians_club.jpg"></a>
+					<div class="modelRight tl">
+						<a target="_blank" class="modelTitle" href="#">让科学成为兴趣</a>
+						<div class="modelIntro tl">火星人俱乐部是一个科学俱乐部，致力于中国青少年的现代科学教育。成立于2014年，由一支来自北大、清华的青年团队创办，老师均来自于北大、清华、中科院等高校的物理学、电子学、计算机软件等专业的博士研究生。
+                        </div>
+                        <div class="w100 clearfix">
+                         <ol class="fr pt5">已报名:<em class="red">800</em></ol>
+                        </div>
+                         <div class="w100 pt5 overflow clearfix tl">
+                         时间：2016-06-20 &nbsp; &nbsp; &nbsp; &nbsp; 地点：河南牧业经济学员2楼1205楼
+                        </div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+<div class="page pt30 overflow clearfix pb25 ">
+         <ul>
+          <li class="fl"><a href="###">上一页</a><a class="cur" href="###">1</a><a href="###">2</a><a href="###">3</a><a href="###">4</a><a href="###">5</a><a href="###">下一页</a></li>
+          <li class="fr"><em class="fl">共5页 到&nbsp;<input name="" type="text"  size="3" class="boderr"  style="height:30px"/>&nbsp;页</em> <a href="#" class="cur fr">确定</a></li>
+         </ul>
+      </div>
+
+
+<!--版权-->
+<div class="copy_bg overflow clearfix w100">
+ <div class="wrap overflow baise ">
+  <p class="fl"><img src="images/index_r42_c7.jpg" /></p>
+  <dl class="fl pl20">
+  <dt><a href="#">首页</a>   <a href="#">培训信息</a>   <a href="#">会议信息</a>   <a href="#">专家信息</a>  <a href="#"> 场地信息</a>  <a href="#"> 在线培训</a>  <a href="#"> 培训机构</a>  <a href="#">  培训联盟</a>   <a href="#">人才招聘</a> 
+  </dt>
+  <dd>
+  &copy; 2019 XX公司&nbsp;&nbsp;ICP备XXXXXXXX号&nbsp;&nbsp;技术支持：<a href="http://www.jsdaima.com/" title="js代码" target="_blank">js代码（www.jsdaima.com）</a> 
+  </dd>
+  </dl>
+  <ol class="fr">
+   <img src="images/index_r42_c38.jpg" />
+  </ol>
+ </div>
+</div>
+
+</body>
+</html>

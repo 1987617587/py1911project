@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>在线讲堂公开课职场教育培训机构服务平台HTML5网站模板</title>
+    <meta name="keywords" content="在线讲堂,公开课,职场教育,培训机构,服务平台,HTML5网站模板"/>
+    <meta name="description" content="在线讲堂公开课职场教育培训机构服务平台HTML5网站模板下载。下载文件包含20张html网页模板，只提供首页在线演示，其他页面需自行下载后查看。"/>
+    <meta name="author" content="html中文网(www.html.cn)"/>
+    <meta name="copyright" content="html中文网(www.html.cn)"/>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<!--标志搜索-->
+{% load myfun %}
+<div class="w100" id="inner" style="z-index: 1000000; position: static; top: 0px;">
+    <div class="log_bg overflow clearfix">
+        <div class="wrapp overflow pt15">
+            <ol class="fr overflow" style="width:100px">
+                <em class="t1"><a href="#" class="baise">5</a></em>
+            </ol>
+        </div>
+        <div class="wrapp  ">
+            <p class="fl overflow"><img src="/static/images/index_r2_c6.jpg"/></p>
+            <dl class="fl pl90 pt10 overflow w515 ">
+                <dt>
+                    <input type="text" class="ss_in" value="请输入关键字"
+                           onfocus="if(this.value=='请输入关键字'){this.value='';this.style.color='#333'}"
+                           onblur="if(this.value==''){this.value='请输入关键字';this.style.color='#aaa'}"
+                           x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword"/>
+                    <input type="button" class="an_bg"/>
+                </dt>
+                <!--                <dd>-->
+                <!--                    {% for category in categories %}-->
+                <!--                    <a href="#" class="f12 huise">{{category.name}}</a>-->
+                <!--                    {% endfor %}-->
+
+                <!--                </dd>-->
+            </dl>
+            <!--发布登录-->
+
+            <!--  登录成功 -->
+<!--            <dl class="w336   pt10 fr">-->
+<!--                <dt>-->
+<!--                    <a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>-->
+<!--                    <ol class="f18 fr   ty">-->
+
+<!--                        18888888888-->
+<!--                        <em class="tl f14 l-30 w100">-->
+<!--                            <img src="/static/images/yunketang_r12_c4.jpg" width="50" height="50" class="fl mr10"/> <a-->
+<!--                                href="#"-->
+<!--                                class="red">个人中心</a>-->
+<!--                            <a href="#">退出</a>-->
+<!--                        </em>-->
+
+<!--                    </ol>-->
+<!--                </dt>-->
+<!--                <dd><img src="/static/images/index_r6_c31.jpg"/></dd>-->
+<!--            </dl>-->
+            <!--  未登录 -->
+            <dl class="w336 overflow  pt10 fr">
+                <dt><a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>
+                    <ol class="f18 fr overflow">
+                        <a href="#">登录</a> | <a href="#" class="red">注册</a>
+                    </ol>
+                </dt>
+                <dd><img src="/static/images/index_r6_c31.jpg"/></dd>
+            </dl>
+        </div>
+    </div>
+
+    <!--nav-->
+
+
+    <div class="nav_bg overflow  clearfix">
+        <div class="wrappp">
+            <ul>
+                <li style="background:none"><a href="#">首页 </a></li>
+                <li><a href="#">师资介绍信息 </a></li>
+                <li><a href="#">课程分类 </a></li>
+                <li><a href="#">最新课程 </a></li>
+                <li><a href="#">所有课程 </a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var obj11 = document.getElementById("inner");
+var top11 = getTop(obj11);
+var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+ 
+	var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (bodyScrollTop > top11){
+		obj11.style.position = (isIE6) ? "absolute" : "fixed";
+		obj11.style.top = (isIE6) ? bodyScrollTop + "px" : "0px";
+	} else {
+		obj11.style.position = "static";
+	}
+}
+function getTop(e){
+ 
+	var offset = e.offsetTop;
+	if(e.offsetParent != null) offset += getTop(e.offsetParent);
+	return offset;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<!--js-->
+
+<div class="warpo">
+    <div class="baoming overflow"><a href="#">公益</a> | <a href="#">公告</a> | <a href="#">新闻</a> | <a href="#">活动</a>
+    </div>
+</div>
+<!-- 代码begin -->
+<div class="flexslider">
+    <ul class="slides">
+        {% for a in ads %}
+
+
+        <li style="background: url(/media/{{a.img}}) 50% 0 no-repeat; z-index:1"><a
+                href="#" class="lj">{{a.desc}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<!-- 代码end -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.flexslider-min.js"></script>
+<script>
+$(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<!--ad-->
+<div class="w1000 clearfix overflow">
+    <p><img src="/static/images/index_r11_c1.jpg"/></p>
+</div>
+
+<!--培训机构培训荟萃-->
+<div class="wrap overflow pt30 bg_r1">
+    <!--left-->
+    <div class="w555 fl overflow">
+        <div class="w100 overflow">
+            <p class="fl tl"><em class="f24 red">培训机构荟萃</em><br/>
+                <i class="fon_z f10 huise ">Training institutions</i></p>
+            <span class="fr pt15"><img src="/static/images/index_r14_c16.jpg"/></span></div>
+        <div class="w100 clearfix pt20 overflow huicui">
+            <div class=" px_li1  overflow clearfix   ">
+                <dl>
+                    <dt>五星讲师</dt>
+                    <dd>
+                        {% get_stars_teachers as stars_teachers %}
+                        {% for teacher in stars_teachers %}
+                        <a href="#">{{teacher.name}}</a>
+                        {% endfor %}
+
+
+                    </dd>
+
+                </dl>
+                <dl>
+                    <dt>四星讲师</dt>
+                    <dd>
+                        {% for teacher in teachers %}
+                        {% if teacher.stars == 4 %}
+                        <a href="#">{{teacher.name}}</a>
+
+                        {% endif %}
+                        {% endfor %}
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>三星讲师</dt>
+                    <dd>
+                        {% for teacher in teachers %}
+                        {% if teacher.stars == 3 %}
+                        <a href="#">{{teacher.name}}</a>
+
+                        {% endif %}
+                        {% endfor %}
+                    </dd>
+                </dl>
+
+
+            </div>
+
+        </div>
+        <div class="w100 overflow clearfix">
+            <ol class="fr mr10">
+                <a href="#">查看更多</a> <img src="/static/images/index_r16_c22.jpg"/>
+            </ol>
+        </div>
+    </div>
+    <div class="w555 fr overflow">
+        <div class="w100 overflow">
+            <p class="fl tl"><em class="f24 red">培训分类信息</em><br/>
+                <i class="fon_z f10 huise ">Training classified </i></p>
+            <span class="fr pt15"><img src="/static/images/index_r14_c16.jpg"/></span></div>
+        <div class="w100 clearfix pt20 overflow list_inf ">
+            <ul>
+
+                {% for category in categories %}
+                <li><a href="#">{{category.name}}</a></li>
+                {% endfor %}
+
+            </ul>
+        </div>
+        <div class="w100 overflow clearfix pt10">
+            <ol class="fr mr10">
+                <a href="#">查看更多</a> <img src="/static/images/index_r16_c22.jpg"/>
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="bot_bg2 overflow clearfix "></div>
+<div class="main_bg overflow clearfix">
+    <!--最新培训信息-->
+    <div class="wrap pt15 overflow clearfix">
+        <p class="fl"><em class="f24 red">最新培训课程</em>&nbsp;&nbsp;&nbsp;<i class="fon_z  f10 huise ">Cloud
+            classroom</i><br/>
+            <img src="/static/images/index_r21_c9.jpg" class="fl pt5"/></p>
+        <span class="bg_more fr  overflow"> <a href="#">查看更多 +</a> </span></div>
+    <div class="wrap pt30 overflow clearfix">
+        <!--left-->
+        <div class="w400 fl overflow ">
+            <div class="w100 bg_n1 overflow"><a href="#"><img src="/static/images/index_r23_c8.jpg" width="218"
+                                                              height="158"
+                                                              class="fl"/></a>
+                <ol class="fr">
+                    <h5><a href="#">郝鸿峰《传统企业的互联网机会》</a></h5>
+                    录制嘉宾：尹文刚 录制题目：《脑潜能开发》 录制…录制嘉宾：尹文刚 录制题目：《脑潜能开发》 录制…
+                </ol>
+            </div>
+            <div class="w100 pt30 overflow clearfix">
+                <ul>
+                    {% get_latest_curriculum as latest_curriculum %}
+
+                    {% for curriculum in latest_curriculum %}
+                    <li><span>{{curriculum.create_time|date:'Y-m-d'}}</span><a href="#">{{curriculum.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!--right-->
+        <div class="w760 fr overflow">
+            <ul>
+                {% get_latest_curriculum as latest_curriculum %}
+
+                {% for curriculum in latest_curriculum %}
+                <li><a href="#"><img src="/static/images/index_r24_c21.jpg" width="220" height="143"/></a>
+                    <h3><a href="#">{{curriculum.name}}</a></h3>
+                    <ol>
+                        {{curriculum}}课程简介，点击进入课程详情
+                    </ol>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+    <div class="hr w100 mt20 overflow clearfix"></div>
+
+
+</div>
+
+
+<!--训训课堂-->
+<div class="wrap pt30 overflow clearfix">
+    <p class="fl"><em class="f24 red">训训云课堂</em>&nbsp;&nbsp;&nbsp;<i class="fon_z  f10 huise ">Cloud classroom</i><br/>
+        <img src="/static/images/index_r21_c9.jpg" class="fl pt5"/></p>
+    <span class="bg_more fr  overflow"> <a href="#">查看更多 +</a> </span>
+</div>
+
+<div class="wrap pt30 overflow clearfix">
+    <!--left-->
+    <div class="w400 fl overflow ">
+        <div class="w100 bg_n1 overflow"><a href="#"><img src="/static/images/index_r23_c8.jpg" width="218" height="158"
+                                                          class="fl"/></a>
+            <ol class="fr">
+                <h5><a href="#">郝鸿峰《传统企业的互联网机会》</a></h5>
+                <div class="nr">录制嘉宾：尹文刚 录制题目：《脑潜能开发》 录制…录制嘉宾：尹文刚 录制题目：《脑潜能开发》 录制…</div>
+                <div class="tl gw">
+                    <i class="fl f16">￥298</i>
+                    <em><a href="#"><img src="/static/images/gw.png" class="fr"/></a></em>
+                </div>
+
+            </ol>
+        </div>
+        <div class="w100 pt30 overflow clearfix">
+            <ul>
+                {% for curriculum in curriculum %}
+                <li><span>{{curriculum.name}}</span><a href="#">{{curriculum.name}}简介</a></li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!--right-->
+    <div class="w760 fr overflow">
+        <ul>
+
+            {% for curriculum in curriculum %}
+            <li>
+                <p>
+                    <a href="#">
+                        <img src="/static/images/index_r72_c38.jpg" width="212" height="123"/>
+                        <em><img src="/static/images/index11.png"/></em>
+                    </a>
+                </p>
+
+                <div class="gwh clearfix">
+                    <a href="#"><img src="/static/images/gw.png" class="fr pt10 pr10"/></a>
+                    <span><a href="#">{{curriculum.name}}</a></span><br/>
+                    <i class="fl f16">￥{{curriculum.price}}</i>
+
+                </div>
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>
+
+<div class="hr w100 mt30 overflow clearfix"></div>
+
+<div class="wrap  pt30 overflow clearfix">
+
+
+    <div class="hr w100 mt15 overflow clearfix"></div>
+
+    <!--链接-->
+    <div class="w100 clearfix overflow links_bg">
+        <div class="wrap">
+            <h5 class="f18 tl l-30">友情链接</h5>
+        </div>
+        <div class="wrap overflow clearfix links pt15">
+            <div class="row3">
+                <a href="#">训训大课堂</a> <a href="#">训训大课堂</a><a href="#">训训大课堂</a><a href="#">训训大课堂</a><a
+                    href="#">训训大课堂</a><a
+                    href="#">训训大课堂</a><a href="#">训训大课堂</a><a href="#">训训大课堂</a><a href="#">训训大课堂</a><a
+                    href="#">训训大课堂</a><a
+                    href="#">训训大课堂</a>
+            </div>
+        </div>
+    </div>
+
+    <!--版权-->
+    <div class="copy_bg overflow clearfix w100">
+        <div class="wrap overflow baise ">
+            <p class="fl"><img src="/static/images/index_r42_c7.jpg"/></p>
+            <dl class="fl pl20">
+                <dt><a href="#">首页</a> <a href="#">培训信息</a> <a href="#">会议信息</a> <a href="#">专家信息</a> <a href="#">
+                    场地信息</a>
+                    <a href="#"> 在线培训</a> <a href="#"> 培训机构</a> <a href="#"> 培训联盟</a> <a href="#">人才招聘</a>
+                </dt>
+                <dd>
+                    &copy; 2019 XX公司&nbsp;&nbsp;ICP备XXXXXXXX号&nbsp;&nbsp;技术支持：<a href="https://www.html.cn/"
+                                                                                 title="html中文网"
+                                                                                 target="_blank">html中文网(www.html.cn)</a>
+                </dd>
+            </dl>
+            <ol class="fr">
+                <img src="/static/images/index_r42_c38.jpg"/>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

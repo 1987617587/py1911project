@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>训训网</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<!--标志搜索-->
+
+
+<div class="log_bg overflow clearfix">
+  <div class="wrapp overflow pt35">
+    <p class="fl overflow"><img src="images/index_r2_c6.jpg" /></p>
+    <dl class="fl pl90 pt10 overflow w515 ">
+      <dt>
+        <input type="text" class="ss_in" value="请输入关键字" onfocus="if(this.value=='请输入关键字'){this.value='';this.style.color='#333'}" onblur="if(this.value==''){this.value='请输入关键字';this.style.color='#aaa'}" x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword" />
+        <input type="button" class="an_bg" />
+      </dt>
+      <dd> <a href="#" class="f12 huise">管理提升培训</a> <a href="#" class="f12 huise">技术技能培训</a> <a href="#" class="f12 huise">资格认证培训</a> <a href="#" class="f12 huise">会计金融培训</a> </dd>
+    </dl>
+    <!--发布登录-->
+    <dl class="w336 overflow  pt10 fr">
+      <dt> <a href="#"><img src="images/index_r4_c33.jpg" class="fl" /></a>
+        <ol class="f18 fr overflow">
+          <a href="#">登录</a> | <a href="#" class="red">注册</a>
+        </ol>
+      </dt>
+      <dd  > <img src="images/index_r6_c31.jpg" /> </dd>
+    </dl>
+  </div>
+</div>
+
+<!--nav-->
+
+
+<div class="nav_bg overflow  clearfix" id ="inner">
+  <div class="wrappp">
+    <ul>
+      <li style="background:none"><a href="#">首页 </a></li>
+      <li><a href="#">培训信息 </a></li>
+      <li><a href="#">会议信息 </a></li>
+      <li><a href="#">训训专家库 </a></li>
+      <li><a href="#">训训云课堂 </a></li>
+      <li><a href="#">训训大讲堂 </a></li>
+      <li><a href="#">免费公开课 </a></li>
+      <li><a href="#">培训机构 </a></li>
+      <li><a href="#">项目路演 </a></li>
+      <li><a href="#">会议培训场地 </a></li>
+      <li><a href="#">人才招聘 </a></li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+var obj11 = document.getElementById("inner");
+var top11 = getTop(obj11);
+var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+ 
+	var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (bodyScrollTop > top11){
+		obj11.style.position = (isIE6) ? "absolute" : "fixed";
+		obj11.style.top = (isIE6) ? bodyScrollTop + "px" : "0px";
+	} else {
+		obj11.style.position = "static";
+	}
+}
+function getTop(e){
+ 
+	var offset = e.offsetTop;
+	if(e.offsetParent != null) offset += getTop(e.offsetParent);
+	return offset;
+}
+</script>
+<!--js-->
+<!--提交订单-->
+<div class="wrapp pt50 overflow clearfix tl f18">
+ 确认订单信息
+</div>
+<div class="wrapp pt35 sp_list  overflow">
+ <ul>
+  <li class="sp_list_r1 tc f16">商品名称</li>
+  <li class="sp_list_r2 tc f16">商品属性</li>
+  <li class="sp_list_r3 tc f16">单价(元)</li>
+ </ul>
+</div>
+<div class="wrapp pt35 sp_list  overflow">
+<ul>
+  <li class="sp_list_r1 tl f12 hui  ">
+   <a href="#"><img src="images/goumai_r1_c1.jpg" width="120" height="90" class="fl mr25"/></a>
+   <a href="#" class="red f14">训教师教学事情</a><br />
+    橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质
+  </li>
+  <li class="sp_list_r2  ">商业管理,体改资深教师经理</li>
+  <li class="sp_list_r3 cs f18 fon_z  ">￥188</li>
+ </ul>
+</div>
+<div class="wrapp overflow bg_g clearfix mt30">
+ <ul>
+  <li >运送方式: 普通配送快递￥10.00</li>
+  <li>发货时间:卖家承诺订单在买家付款后, 30天内发货</li>
+  <li>
+  <script language="javascript" type="text/javascript">
+
+function goods_cut(){
+
+var num_val=document.getElementById('number');
+
+var new_num=num_val.value;
+
+var Num = parseInt(new_num);
+
+if(Num>1)Num=Num-1;
+
+num_val.value=Num;
+
+}
+
+function goods_add(){
+
+var num_val=document.getElementById('number');
+
+var new_num=num_val.value;
+
+var Num = parseInt(new_num);
+
+Num=Num+1;
+
+num_val.value=Num;
+
+}
+</script>
+  <p class="fl mr10">使用积分:</p>
+  <div  class="tc-amount fl pt10">
+  <span class="goods_cut fl" onclick="goods_cut();changePrice();"><img src="images/plus1.gif" alt="减少" width="15" height="15" /></span>
+<input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; " class="fl mt5"/>
+<span class="goods_add fl" onclick="goods_add();changePrice();"><img src="images/plus2.gif" alt="增加" width="15" height="15"  /></span>
+  </div>
+  <p class="fl hui f12 ml10">(目前你有<em class="f18 red">200</em>积分)</p>
+  </li>
+ </ul>
+</div>
+
+<div class="wrapp clearfix pt50 overflow tr l-35">
+ <ul>
+  <li class="tr">实付款：<em class="f24 red ">￥4329.20</em></li>
+  <li class="tr">可获积分<em class="f18 red ">20</em></li>
+  <li>
+   <input type="button" value="提交订单" class="tjdd fr" />
+  </li>
+ </ul>
+</div>
+
+<!--版权-->
+<div class="copy_bg overflow clearfix w100">
+ <div class="wrap overflow baise ">
+  <p class="fl"><img src="images/index_r42_c7.jpg" /></p>
+  <dl class="fl pl20">
+  <dt><a href="#">首页</a>   <a href="#">培训信息</a>   <a href="#">会议信息</a>   <a href="#">专家信息</a>  <a href="#"> 场地信息</a>  <a href="#"> 在线培训</a>  <a href="#"> 培训机构</a>  <a href="#">  培训联盟</a>   <a href="#">人才招聘</a> 
+  </dt>
+  <dd>
+  &copy; 2019 XX公司&nbsp;&nbsp;ICP备XXXXXXXX号&nbsp;&nbsp;技术支持：<a href="http://www.jsdaima.com/" title="js代码" target="_blank">js代码（www.jsdaima.com）</a> 
+  </dd>
+  </dl>
+  <ol class="fr">
+   <img src="images/index_r42_c38.jpg" />
+  </ol>
+ </div>
+</div>
+
+</body>
+</html>
