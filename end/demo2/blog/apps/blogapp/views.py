@@ -53,6 +53,8 @@ def detail(request, articleid):
     if request.method == "GET":
         try:
             article = Article.objects.get(id=articleid)
+            article.views += 1
+            article.save()
             cf = CommentForm()
             return render(request, 'single.html', locals())
         except:
