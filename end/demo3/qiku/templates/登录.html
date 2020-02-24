@@ -3,14 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>训训网</title>
-<link href="css/login.css" rel="stylesheet">
+<link href="/static/css/login.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="login-headbox" data-gct="1">
         <div class="login-head clearfix" data-gct="1">
             <div class="login-logo-box fl clearfix">
-                <a target="_blank" href="http://www.#.com" class="login-logo fl"><img src="images/logr2_c2.jpg"  style="padding-top:3px; padding-left:10px"/></a>
+                <a target="_blank" href="http://www.#.com" class="login-logo fl"><img src="/static/images/logr2_c2.jpg"  style="padding-top:3px; padding-left:10px"/></a>
                 <h1 class="fl">会员登录</h1>
             </div>
             <a target="_blank" class="help-center fr" href="http://help.gongchang.com">帮助中心</a>
@@ -42,7 +42,8 @@
                 </div>
                 <div class="lbc-row btn-box">
                     <input type="hidden" value="https://i.gongchang.com//static.gcimg.net/i/201508/3VbnieYLc4.png8.png" name="url">
-                    <button type="submit" class="lbc-loginnow">立即登录</button>
+<!--                    <button type="submit" class="lbc-loginnow">立即登录</button>-->
+                    <button type="submit" class="lbc-loginnow"><a href="{% url 'qikuapp:list' %}">模拟登录</a></button>
                 </div>
             </div>
         </div>

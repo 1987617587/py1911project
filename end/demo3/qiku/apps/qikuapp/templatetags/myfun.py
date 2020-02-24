@@ -25,6 +25,19 @@ def get_stars_teachers(num=5):
 def get_latest_curriculum(num=4):
     return Curriculum.objects.all().order_by("-create_time")[:num]
 
+
+@register.simple_tag
+def get_latest_curriculum_price():
+    return Curriculum.objects.all().order_by("price")[::]
+
+@register.simple_tag
+def get_hot_curriculum(num=1):
+    return Curriculum.objects.all().order_by("price")[:num]
+
+
+@register.simple_tag
+def get_free_curriculum(num=1):
+    return Curriculum.objects.all().order_by("-price")[:num]
 #
 # @register.simple_tag
 # def get_latest_dates(num=3):

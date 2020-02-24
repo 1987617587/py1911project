@@ -4,6 +4,7 @@ from .models import *
 
 
 admin.site.register(Ads)
+admin.site.register(Ads2)
 admin.site.register(Category)
 admin.site.register(Teacher)
 admin.site.register(Comment)

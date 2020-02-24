@@ -22,6 +22,14 @@ class Ads(models.Model):
         verbose_name = "图片表"
 
 
+class Ads2(models.Model):
+    img = models.ImageField(upload_to="ads", verbose_name="图片")
+    desc = models.CharField(max_length=20, null=True, blank=True, verbose_name="图片说明")
+
+    class Mate:
+        verbose_name = "图片表2"
+
+
 class Category(models.Model):
     name = models.CharField(max_length=20, verbose_name="分类名")
 
@@ -50,7 +58,7 @@ class Curriculum(models.Model):
 
 
 class Teacher(models.Model):
-    name = models.CharField(max_length=20, verbose_name="课程名")
+    name = models.CharField(max_length=20, verbose_name="教师名")
 
     field = models.CharField(max_length=50, verbose_name="权威领域")
     # body = models.TextField(verbose_name="正文")

@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     {% block Title %}
-    <title>首页</title>
+    <title>模板</title>
     {% endblock %}
     <meta name="keywords" content="在线讲堂,公开课,职场教育,培训机构,服务平台,HTML5网站模板"/>
     <meta name="description" content="在线讲堂公开课职场教育培训机构服务平台HTML5网站模板下载。下载文件包含20张html网页模板，只提供首页在线演示，其他页面需自行下载后查看。"/>
@@ -70,7 +70,7 @@
             <dl class="w336 overflow  pt10 fr">
                 <dt><a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>
                     <ol class="f18 fr overflow">
-                        <a href="#">登录</a> | <a href="#" class="red">注册</a>
+                        <a href="{% url 'qikuapp:login'%}">登录</a> | <a href="#" class="red">注册</a>
                     </ol>
                 </dt>
                 <dd><img src="/static/images/index_r6_c31.jpg"/></dd>
