@@ -31,6 +31,7 @@
 
         <div class="wrapp  ">
             <p class="fl overflow"><img src="/static/images/index_r2_c6.jpg"/></p>
+            {% if request.user and request.user.username != ''%}
             <dl class="fl pl90 pt10 overflow w515 ">
                 <dt>
                     <input type="text" class="ss_in" value="请输入关键字"
@@ -38,6 +39,8 @@
                            onblur="if(this.value==''){this.value='请输入关键字';this.style.color='#aaa'}"
                            x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword"/>
                     <input type="button" class="an_bg"/>
+
+
                 </dt>
                 <!--                <dd>-->
                 <!--                    {% for category in categories %}-->
@@ -47,6 +50,24 @@
                 <!--                </dd>-->
 
             </dl>
+            {% else %}
+            <dl class="fl pl90 pt10 overflow w515 ">
+                <dt>
+                    <br>
+                    <form role="search" method="get" id="searchform" action="/search/">
+                            <input  class="ss_in" type="search" placeholder="搜索" required name="q">
+                            <button class="an_bg" type="submit"><span class="ion-ios-search-strong"></span></button>
+                        </form>
+                </dt>
+                <!--                <dd>-->
+                <!--                    {% for category in categories %}-->
+                <!--                    <a href="#" class="f12 huise">{{category.name}}</a>-->
+                <!--                    {% endfor %}-->
+
+                <!--                </dd>-->
+
+            </dl>
+            {% endif %}
             <!--发布登录-->
             {# 登录注册 #}
             {% if request.user and request.user.username != ''%}

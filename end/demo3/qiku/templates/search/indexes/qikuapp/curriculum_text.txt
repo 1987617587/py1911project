@@ -1,0 +1,6 @@
+{{ object.name }}
+{{ object.introduce }}
+{{ object.teacher }}
+{{ object.days }}
+{{ object.price }}
+{{ object.category }}

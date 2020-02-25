@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'qikuapp',
     'DjangoUeditor',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,17 @@ MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media')]
 # 使用django自带的用户类 需要配置
 
 AUTH_USER_MODEL = 'qikuapp.User'
+
+# 添加搜索引擎
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'qikuapp.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+# 分页设置
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+# 设置对搜索结果的分页，每10项结果为一页。
+# 索引生成设置
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+# 这里设置实时更新索引
