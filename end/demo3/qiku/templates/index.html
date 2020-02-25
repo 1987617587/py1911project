@@ -49,6 +49,9 @@ $(function(){
 
 
 
+
+
+
 </script>
 
 <!--ad-->
@@ -146,11 +149,12 @@ $(function(){
             <div class="w100 bg_n1 overflow">
                 {% get_hot_curriculum as hot_curriculum%}
                 {% for curriculum in hot_curriculum%}
-                <a href="#"><img src="/static/images/index_r23_c8.jpg" width="218"
-                                 height="158"
-                                 class="fl"/></a>
+                <a href="{% url 'qikuapp:detail' curriculum.id %}"><img src="/static/images/index_r23_c8.jpg"
+                                                                        width="218"
+                                                                        height="158"
+                                                                        class="fl"/></a>
                 <ol class="fr">
-                    <h5><a href="#">{{curriculum.name}}</a></h5>
+                    <h5><a href="{% url 'qikuapp:detail' curriculum.id %}">{{curriculum.name}}</a></h5>
                     {{curriculum.introduce|truncatechars_html:50}}
                 </ol>
                 {% endfor%}
@@ -160,7 +164,8 @@ $(function(){
                     {% get_latest_curriculum as latest_curriculum %}
 
                     {% for curriculum in latest_curriculum %}
-                    <li><span>{{curriculum.create_time|date:'Y-m-d'}}</span><a href="#">{{curriculum.name}}</a></li>
+                    <li><span>{{curriculum.create_time|date:'Y-m-d'}}</span><a
+                            href="{% url 'qikuapp:detail' curriculum.id %}">{{curriculum.name}}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -171,8 +176,9 @@ $(function(){
                 {% get_latest_curriculum as latest_curriculum %}
 
                 {% for curriculum in latest_curriculum %}
-                <li><a href="#"><img src="/static/images/index_r24_c21.jpg" width="220" height="143"/></a>
-                    <h3><a href="#">{{curriculum.name}}</a></h3>
+                <li><a href="{% url 'qikuapp:detail' curriculum.id %}"><img src="/static/images/index_r24_c21.jpg"
+                                                                            width="220" height="143"/></a>
+                    <h3><a href="{% url 'qikuapp:detail' curriculum.id %}">{{curriculum.name}}</a></h3>
                     <ol>
                         {{curriculum.introduce}}
                     </ol>
@@ -198,17 +204,21 @@ $(function(){
 <div class="wrap pt30 overflow clearfix">
     <!--left-->
     <div class="w400 fl overflow ">
-        <div class="w100 bg_n1 overflow"><a href="#"><img src="/static/images/index_r23_c8.jpg" width="218" height="158"
-                                                          class="fl"/></a>
+        {% get_hot_curriculum as hot_curriculum%}
+        {% for curriculum in hot_curriculum%}
+        <div class="w100 bg_n1 overflow"><a href="{% url 'qikuapp:detail' curriculum.id %}"><img
+                src="/static/images/index_r23_c8.jpg" width="218" height="158"
+                class="fl"/></a>
             <ol class="fr">
+                {% endfor%}
 
                 {% get_hot_curriculum as hot_curriculum%}
                 {% for curriculum in hot_curriculum%}
-                <h5><a href="#">{{curriculum.name}}</a></h5>
+                <h5><a href="{% url 'qikuapp:detail' curriculum.id %}">{{curriculum.name}}</a></h5>
                 <div class="nr">{{curriculum.introduce|truncatechars_html:50}}</div>
                 <div class="tl gw">
                     <i class="fl f16">￥{{curriculum.price}}</i>
-                    <em><a href="#"><img src="/static/images/gw.png" class="fr"/></a></em>
+                    <em><a href="{% url 'qikuapp:detail' curriculum.id %}"><img src="/static/images/gw.png" class="fr"/></a></em>
                 </div>
                 {% endfor%}
 
@@ -217,7 +227,8 @@ $(function(){
         <div class="w100 pt30 overflow clearfix">
             <ul>
                 {% for curriculum in curriculum %}
-                <li><span>{{curriculum.name}}</span><a href="#">{{curriculum.name}}简介</a></li>
+                <li><span>{{curriculum.name}}</span><a href="{% url 'qikuapp:detail' curriculum.id %}">{{curriculum.name}}简介</a>
+                </li>
 
                 {% endfor %}
             </ul>
@@ -230,15 +241,16 @@ $(function(){
             {% for curriculum in curriculum %}
             <li>
                 <p>
-                    <a href="#">
+                    <a href="{% url 'qikuapp:detail' curriculum.id %}">
                         <img src="/static/images/index_r72_c38.jpg" width="212" height="123"/>
                         <em><img src="/static/images/index11.png"/></em>
                     </a>
                 </p>
 
                 <div class="gwh clearfix">
-                    <a href="#"><img src="/static/images/gw.png" class="fr pt10 pr10"/></a>
-                    <span><a href="#">{{curriculum.name}}</a></span><br/>
+                    <a href="{% url 'qikuapp:detail' curriculum.id %}"><img src="/static/images/gw.png"
+                                                                            class="fr pt10 pr10"/></a>
+                    <span><a href="{% url 'qikuapp:detail' curriculum.id %}">{{curriculum.name}}</a></span><br/>
                     <i class="fl f16">￥{{curriculum.price}}</i>
 
                 </div>

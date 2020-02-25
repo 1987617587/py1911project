@@ -41,7 +41,12 @@ def login(request):
             print(user.password)
             # 验证成功生成cookie
             lin(request, user)
-            url = reverse("qikuapp:list")
+            # 人性化处理、
+            next_url = request.GET.get("next")
+            if next_url:
+                url = next_url
+            else:
+                url = reverse("qikuapp:list")
             return redirect(to=url)
             # return render(request, '培训信息.html', locals())
         except:
@@ -119,6 +124,7 @@ def list(request):
         page = paginator.get_page(num)
         return render(request, '培训信息.html', locals())
     else:
+        # 使用拼接，人性化处理，传递未登录之前准备进入的页面
         url = reverse("qikuapp:index")
         return redirect(to=url)
 
@@ -128,44 +134,61 @@ def detail(request, c_id):
     # curriculum = Curriculum.objects.get(id=c_id)
     #
     # return render(request, '购买页面.html', locals())
-    if request.method == "GET":
-        try:
-            ads2 = Ads2.objects.all()
-            curriculum = Curriculum.objects.get(id=c_id)
-            cf = CommentForm()
-            return render(request, '购买页面.html', locals())
-        except:
-            return HttpResponse("查询无果")
-    else:
-        cf = CommentForm(request.POST)
-        if cf.is_valid():
-            # 此时cf是一个表单，不是实例
-            # cf.article = Article.objects.get(id=articleid)
-            # 保存前对commit默认值修改为False  comment就是实例了
-            comment = cf.save(commit=False)
-            comment.curriculum = Curriculum.objects.get(id=c_id)
-            comment.save()
-
-            url = reverse("qikuapp:detail", args=(c_id,))
-            return redirect(to=url)
-
+    if request.user and request.user.username != '':
+        if request.method == "GET":
+            try:
+                ads2 = Ads2.objects.all()
+                curriculum = Curriculum.objects.get(id=c_id)
+                cf = CommentForm()
+                return render(request, '购买页面.html', locals())
+            except:
+                return HttpResponse("查询无果")
         else:
-            ads2 = Ads2.objects.all()
-            curriculum = Curriculum.objects.get(id=c_id)
-            cf = CommentForm()
-            errors = "输入格式有误！"
-            return render(request, '购买页面.html', locals())
+            cf = CommentForm(request.POST)
+            if cf.is_valid():
+                # 此时cf是一个表单，不是实例
+                # cf.article = Article.objects.get(id=articleid)
+                # 保存前对commit默认值修改为False  comment就是实例了
+                comment = cf.save(commit=False)
+                comment.curriculum = Curriculum.objects.get(id=c_id)
+                comment.save()
+
+                url = reverse("qikuapp:detail", args=(c_id,))
+                return redirect(to=url)
+
+            else:
+                ads2 = Ads2.objects.all()
+                curriculum = Curriculum.objects.get(id=c_id)
+                cf = CommentForm()
+                errors = "输入格式有误！"
+                return render(request, '购买页面.html', locals())
+    else:
+        url = reverse('qikuapp:login')+'?next=/detail/'+c_id+'/'
+        return redirect(to=url)
 
 
-def buy(request):
+def buy(request,c_id):
     # 购物车
-
+    user = request.user
+    try:
+        curriculum = Curriculum.objects.get(id=c_id)
+        # 关联用户和课程
+        request.user.curriculum.add(curriculum)
+    except:
+        error = "加入购物车失败"
+    # curriculum = request.user.curriculum
     return render(request, '提交订单.html', locals())
 
 
 def add(request, c_id):
     # 加入购物车，创建用户与课程直接的关系
-
+    user = request.user
+    try:
+        curriculum = Curriculum.objects.get(id=c_id)
+        # 关联用户和课程
+        request.user.curriculum.add(curriculum)
+    except:
+        error = "加入购物车失败"
     url = reverse("qikuapp:list")
     return redirect(to=url)
 

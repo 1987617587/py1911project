@@ -24,7 +24,7 @@
 
         <div class="wrapp overflow pt15">
             <ol class="fr overflow" style="width:100px">
-                <em class="t1"><a href="#" class="baise">5</a></em>
+                <em class="t1"><a href="{% url 'qikuapp:buy' 0 %}" class="baise">{{request.user.curriculum.count}}</a></em>
             </ol>
         </div>
         {% endif %}
@@ -149,10 +149,10 @@ function getTop(e){
 </script>
 <!--js-->
 
-<div class="warpo">
-    <div class="baoming overflow"><a href="#">公益</a> | <a href="#">公告</a> | <a href="#">新闻</a> | <a href="#">活动</a>
-    </div>
-</div>
+<!--<div class="warpo">-->
+<!--    <div class="baoming overflow"><a href="#">公益</a> | <a href="#">公告</a> | <a href="#">新闻</a> | <a href="#">活动</a>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 {% block body %}

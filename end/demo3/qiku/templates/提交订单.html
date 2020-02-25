@@ -8,7 +8,6 @@
 {# 身体 #}
 
 
-
 <script type="/static/text/javascript">
 var obj11 = document.getElementById("inner");
 var top11 = getTop(obj11);
@@ -29,36 +28,45 @@ function getTop(e){
 	if(e.offsetParent != null) offset += getTop(e.offsetParent);
 	return offset;
 }
+
+
+
 </script>
 <!--js-->
 <!--提交订单-->
 <div class="wrapp pt50 overflow clearfix tl f18">
- 确认订单信息
+    确认订单信息
 </div>
 <div class="wrapp pt35 sp_list  overflow">
- <ul>
-  <li class="sp_list_r1 tc f16">商品名称</li>
-  <li class="sp_list_r2 tc f16">商品属性</li>
-  <li class="sp_list_r3 tc f16">单价(元)</li>
- </ul>
+    <ul>
+        <li class="sp_list_r1 tc f16">课程名称</li>
+        <li class="sp_list_r2 tc f16">代课教师</li>
+        <li class="sp_list_r3 tc f16">单价/时长(元)</li>
+    </ul>
 </div>
+{% for c in request.user.curriculum.all %}
+
 <div class="wrapp pt35 sp_list  overflow">
-<ul>
-  <li class="sp_list_r1 tl f12 hui  ">
-   <a href="#"><img src="/static/images/goumai_r1_c1.jpg" width="120" height="90" class="fl mr25"/></a>
-   <a href="#" class="red f14">训教师教学事情</a><br />
-    橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质小镇姗姗 橘子味的你 经典气质
-  </li>
-  <li class="sp_list_r2  ">商业管理,体改资深教师经理</li>
-  <li class="sp_list_r3 cs f18 fon_z  ">￥188</li>
- </ul>
+    <ul>
+
+        <li class="sp_list_r1 tl f12 hui  ">
+            <a href="#"><img src="/static/images/goumai_r1_c1.jpg" width="120" height="90" class="fl mr25"/></a>
+            <a href="#" class="red f14">{{c.name}}</a><br/>
+            {{c.introduce}}
+        </li>
+        <li class="sp_list_r2  ">{{c.teacher}}</li>
+        <li class="sp_list_r3 cs f18 fon_z  ">￥{{c.price}}/{{c.days}}天</li>
+
+    </ul>
 </div>
+{% endfor %}
+
 <div class="wrapp overflow bg_g clearfix mt30">
- <ul>
-  <li >运送方式: 普通配送快递￥10.00</li>
-  <li>发货时间:卖家承诺订单在买家付款后, 30天内发货</li>
-  <li>
-  <script language="javascript" type="/static/text/javascript">
+    <ul>
+        <li>运送方式: 普通配送快递￥10.00</li>
+        <li>发货时间:卖家承诺订单在买家付款后, 30天内发货</li>
+        <li>
+            <script language="javascript" type="/static/text/javascript">
 
 function goods_cut(){
 
@@ -87,25 +95,33 @@ Num=Num+1;
 num_val.value=Num;
 
 }
-</script>
-  <p class="fl mr10">使用积分:</p>
-  <div  class="tc-amount fl pt10">
-  <span class="goods_cut fl" onclick="goods_cut();changePrice();"><img src="/static/images/plus1.gif" alt="减少" width="15" height="15" /></span>
-<input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()" style="border:1px solid #ccc; " class="fl mt5"/>
-<span class="goods_add fl" onclick="goods_add();changePrice();"><img src="/static/images/plus2.gif" alt="增加" width="15" height="15"  /></span>
-  </div>
-  <p class="fl hui f12 ml10">(目前你有<em class="f18 red">200</em>积分)</p>
-  </li>
- </ul>
+
+
+
+            </script>
+            <p class="fl mr10">使用积分:</p>
+            <div class="tc-amount fl pt10">
+                <span class="goods_cut fl" onclick="goods_cut();changePrice();"><img src="/static/images/plus1.gif"
+                                                                                     alt="减少" width="15"
+                                                                                     height="15"/></span>
+                <input name="number" type="text" id="number" value="1" size="4" onblur="changePrice()"
+                       style="border:1px solid #ccc; " class="fl mt5"/>
+                <span class="goods_add fl" onclick="goods_add();changePrice();"><img src="/static/images/plus2.gif"
+                                                                                     alt="增加" width="15"
+                                                                                     height="15"/></span>
+            </div>
+            <p class="fl hui f12 ml10">(目前你有<em class="f18 red">200</em>积分)</p>
+        </li>
+    </ul>
 </div>
 
 <div class="wrapp clearfix pt50 overflow tr l-35">
- <ul>
-  <li class="tr">实付款：<em class="f24 red ">￥4329.20</em></li>
-  <li class="tr">可获积分<em class="f18 red ">20</em></li>
-  <li>
-   <input type="button" value="提交订单" class="tjdd fr" />
-  </li>
- </ul>
+    <ul>
+        <li class="tr">实付款：<em class="f24 red ">￥6666</em></li>
+        <li class="tr">可获积分<em class="f18 red ">20</em></li>
+        <li>
+            <input type="button" value="提交订单" class="tjdd fr"/>
+        </li>
+    </ul>
 </div>
 {% endblock %}
