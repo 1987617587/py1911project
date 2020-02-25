@@ -18,15 +18,17 @@
 {% load myfun %}
 <div class="w100" id="inner" style="z-index: 1000000; position: static; top: 0px;">
     <div class="log_bg overflow clearfix">
-
-        {% block order_number %}
+        {% block login_register %}
         {# 订单数 #}
+        {% if request.user and request.user.username != ''%}
+
         <div class="wrapp overflow pt15">
             <ol class="fr overflow" style="width:100px">
                 <em class="t1"><a href="#" class="baise">5</a></em>
             </ol>
         </div>
-        {% endblock %}
+        {% endif %}
+
         <div class="wrapp  ">
             <p class="fl overflow"><img src="/static/images/index_r2_c6.jpg"/></p>
             <dl class="fl pl90 pt10 overflow w515 ">
@@ -46,39 +48,38 @@
 
             </dl>
             <!--发布登录-->
-            {% block login_register %}
             {# 登录注册 #}
-            <!--  登录成功 -->
-            <!--            <dl class="w336   pt10 fr">-->
-            <!--                <dt>-->
-            <!--                    <a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>-->
-            <!--                    <ol class="f18 fr   ty">-->
+            {% if request.user and request.user.username != ''%}
+            <!--              登录成功-->
+            <dl class="w336   pt10 fr">
+                <dt>
+                    <a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>
+                    <ol class="f18 fr   ty">
+                        {{request.user.username}}
+                        <em class="tl f14 l-30 w100">
+                            <img src="/static/images/yunketang_r12_c4.jpg" width="50" height="50" class="fl mr10"/>
+                            <a href="#" class="red">个人中心</a>
+                            <a href="{% url 'qikuapp:loginout' %}">退出</a>
+                        </em>
 
-            <!--                        18888888888-->
-            <!--                        <em class="tl f14 l-30 w100">-->
-            <!--                            <img src="/static/images/yunketang_r12_c4.jpg" width="50" height="50" class="fl mr10"/> <a-->
-            <!--                                href="#"-->
-            <!--                                class="red">个人中心</a>-->
-            <!--                            <a href="#">退出</a>-->
-            <!--                        </em>-->
-
-            <!--                    </ol>-->
-            <!--                </dt>-->
-            <!--                <dd><img src="/static/images/index_r6_c31.jpg"/></dd>-->
-            <!--            </dl>-->
-            <!--  未登录 -->
-            {{user.username}}
-
+                    </ol>
+                </dt>
+                <dd><img src="/static/images/index_r6_c31.jpg"/></dd>
+            </dl>
+            <!--              未登录-->
+            {% else %}
             <dl class="w336 overflow  pt10 fr">
                 <dt><a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>
                     <ol class="f18 fr overflow">
-                        <a href="{% url 'qikuapp:login'%}">登录</a> | <a href="{% url 'qikuapp:register'%}" class="red">注册</a>
+                        <a href="{% url 'qikuapp:login'%}">登录</a> | <a href="{% url 'qikuapp:register'%}"
+                                                                       class="red">注册</a>
                     </ol>
                     <em>{{request.user.name}}</em>
                     <em>{{request.user}}</em>
                 </dt>
                 <dd><img src="/static/images/index_r6_c31.jpg"/></dd>
             </dl>
+            {% endif %}
             {% endblock %}
 
         </div>
@@ -93,8 +94,7 @@
                 <li style="background:none"><a href="#">首页 </a></li>
                 <li><a href="#">师资介绍信息 </a></li>
                 <li><a href="#">课程分类 </a></li>
-                <li><a href="#">最新课程 </a></li>
-                <li><a href="#">所有课程 </a></li>
+                <li><a href="{% url 'qikuapp:list'%}">所有课程 </a></li>
 
             </ul>
         </div>
@@ -120,6 +120,10 @@ function getTop(e){
 	if(e.offsetParent != null) offset += getTop(e.offsetParent);
 	return offset;
 }
+
+
+
+
 
 
 
@@ -174,6 +178,10 @@ $(function(){
 		pauseOnAction: false
 	});
 });
+
+
+
+
 
 
 

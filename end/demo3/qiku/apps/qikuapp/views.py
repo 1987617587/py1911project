@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from django.contrib.auth import login as lin,authenticate,logout as lout
+from django.contrib.auth import login as lin, authenticate, logout as lout
 
 from qikuapp.forms import CommentForm
 from .models import *
@@ -19,7 +19,7 @@ def index(request):
     teachers = Teacher.objects.all()
     curriculum = Curriculum.objects.all()
     categories = Category.objects.all()
-
+    print(request.user)
     return render(request, 'index.html', locals())
 
 
@@ -36,9 +36,11 @@ def login(request):
         try:
             user = authenticate(username=username, password=password)
             # user = User.objects.get(username=username)
-            print("找到用户",user)
+            print("找到用户", user)
             print(user.username)
             print(user.password)
+            # 验证成功生成cookie
+            lin(request, user)
             url = reverse("qikuapp:list")
             return redirect(to=url)
             # return render(request, '培训信息.html', locals())
@@ -68,40 +70,57 @@ def register(request):
         return render(request, '注册.html', locals())
 
 
+def loginout(request):
+    # 删除 cookie
+
+    lout(request)
+    url = reverse("qikuapp:index")
+
+    return redirect(to=url)
+    # return HttpResponse("退出")
+
+
 def list(request):
-    # 登陆后展示全部数据
-    ads2 = Ads2.objects.all()
-    type_page = request.GET.get("type")
-    category_id, teacher_id, price_id = None, None, None
-    if type_page == "category":
-        category_id = request.GET.get("category_id")
-        try:
-            category = Category.objects.get(id=category_id)
-            curriculum = category.curriculum_set.all()
-        except:
-            return HttpResponse("标签不合法！")
-    elif type_page == "teacher":
-        teacher_id = request.GET.get("teacher_id")
-        try:
-            teacher = Teacher.objects.get(id=teacher_id)
-            curriculum = teacher.curriculum_set.all()
-        except:
-            return HttpResponse("标签不合法！")
-    elif type_page == "price":
-        curriculum_price = request.GET.get("curriculum_price")
+    if request.user and request.user.username != '':
+        print(request.user)
+        print(request.user.username)
 
-        curriculum = Curriculum.objects.filter(price=curriculum_price)
+        # 登陆后展示全部数据
+        ads2 = Ads2.objects.all()
+        type_page = request.GET.get("type")
+        category_id, teacher_id, price_id = None, None, None
+        if type_page == "category":
+            category_id = request.GET.get("category_id")
+            try:
+                category = Category.objects.get(id=category_id)
+                curriculum = category.curriculum_set.all()
+            except:
+                return HttpResponse("标签不合法！")
+        elif type_page == "teacher":
+            teacher_id = request.GET.get("teacher_id")
+            try:
+                teacher = Teacher.objects.get(id=teacher_id)
+                curriculum = teacher.curriculum_set.all()
+            except:
+                return HttpResponse("标签不合法！")
+        elif type_page == "price":
+            curriculum_price = request.GET.get("curriculum_price")
 
+            curriculum = Curriculum.objects.filter(price=curriculum_price)
+
+        else:
+            curriculum = Curriculum.objects.all()
+        teachers = Teacher.objects.all()
+
+        categories = Category.objects.all()
+        # 分页器
+        paginator = Paginator(curriculum, 2)
+        num = request.GET.get("pagenum", 1)
+        page = paginator.get_page(num)
+        return render(request, '培训信息.html', locals())
     else:
-        curriculum = Curriculum.objects.all()
-    teachers = Teacher.objects.all()
-
-    categories = Category.objects.all()
-    # 分页器
-    paginator = Paginator(curriculum, 2)
-    num = request.GET.get("pagenum", 1)
-    page = paginator.get_page(num)
-    return render(request, '培训信息.html', locals())
+        url = reverse("qikuapp:index")
+        return redirect(to=url)
 
 
 def detail(request, c_id):
@@ -142,6 +161,13 @@ def buy(request):
     # 购物车
 
     return render(request, '提交订单.html', locals())
+
+
+def add(request, c_id):
+    # 加入购物车，创建用户与课程直接的关系
+
+    url = reverse("qikuapp:list")
+    return redirect(to=url)
 
 
 def favicon(request):

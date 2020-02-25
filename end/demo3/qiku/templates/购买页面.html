@@ -82,7 +82,7 @@ function getTop(e){
         </ul>
         <dl>
             <dd><a href="{% url 'qikuapp:buy' %}" class="bg2">购买课程</a></dd>
-            <dd><a href="#" class="bg2">加入购物车</a></dd>
+            <dd><a href="{% url 'qikuapp:add' curriculum.id %}" class="bg2">加入购物车</a></dd>
         </dl>
         <div class="w100 pt15 clearfix fenx ">
             <ul>
