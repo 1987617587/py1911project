@@ -7,6 +7,7 @@ urlpatterns = [
     # url(r'^index/$',views.index,name='index'),
     url(r'^$', views.index, name='index'),
     url(r'^login$', views.login, name='login'),
+    url(r'^register$', views.register, name='register'),
     url(r'^list$', views.list, name='list'),
     url(r'^buy$', views.buy, name='buy'),
     url(r'^detail/(\d+)/$', views.detail, name='detail'),

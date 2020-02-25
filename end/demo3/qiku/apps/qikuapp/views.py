@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 
+from qikuapp.forms import CommentForm
 from .models import *
 # 分页和分页器
 from django.core.paginator import Page, Paginator
@@ -26,6 +27,10 @@ def contact(request):
 
 def login(request):
     return render(request, '登录.html', locals())
+
+
+def register(request):
+    return render(request, '注册.html', locals())
 
 
 def list(request):
@@ -64,15 +69,41 @@ def list(request):
 
 
 def detail(request, c_id):
-    ads2 = Ads2.objects.all()
-    curriculum = Curriculum.objects.get(id=c_id)
+    # ads2 = Ads2.objects.all()
+    # curriculum = Curriculum.objects.get(id=c_id)
+    #
+    # return render(request, '购买页面.html', locals())
+    if request.method == "GET":
+        try:
+            ads2 = Ads2.objects.all()
+            curriculum = Curriculum.objects.get(id=c_id)
+            cf = CommentForm()
+            return render(request, '购买页面.html', locals())
+        except:
+            return HttpResponse("查询无果")
+    else:
+        cf = CommentForm(request.POST)
+        if cf.is_valid():
+            # 此时cf是一个表单，不是实例
+            # cf.article = Article.objects.get(id=articleid)
+            # 保存前对commit默认值修改为False  comment就是实例了
+            comment = cf.save(commit=False)
+            comment.curriculum = Curriculum.objects.get(id=c_id)
+            comment.save()
 
-    return render(request, '购买页面.html', locals())
+            url = reverse("qikuapp:detail", args=(c_id,))
+            return redirect(to=url)
+
+        else:
+            ads2 = Ads2.objects.all()
+            curriculum = Curriculum.objects.get(id=c_id)
+            cf = CommentForm()
+            errors = "输入格式有误！"
+            return render(request, '购买页面.html', locals())
 
 
 def buy(request):
     # 购物车
-    ads2 = Ads2.objects.all()
 
     return render(request, '提交订单.html', locals())
 

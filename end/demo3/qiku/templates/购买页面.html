@@ -30,6 +30,9 @@ function getTop(e){
 }
 
 
+
+
+
 </script>
 <!--js-->
 <div class="index_show">
@@ -55,7 +58,8 @@ function getTop(e){
 <script type="text/javascript" src="/static/js/zzsc.js"></script>
 <!--路径-->
 <div class="wrapp pt10 overflow clearfix f18 l-35">
-    <p class="fl"><img src="/static/images/t.jpg" class="fl pt15 pr10"/> <a href="/list">首页</a> > <a href="/list?type=teacher&teacher_id={{curriculum.teacher.id}}">{{curriculum.teacher}}</a> >
+    <p class="fl"><img src="/static/images/t.jpg" class="fl pt15 pr10"/> <a href="/list">首页</a> > <a
+            href="/list?type=teacher&teacher_id={{curriculum.teacher.id}}">{{curriculum.teacher}}</a> >
         <em class="red">{{curriculum.name}}</em></p>
 </div>
 
@@ -96,6 +100,9 @@ function getTop(e){
                     <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 
 
+
+
+
                     </script>
                     <div class="fl "> 分享</div>
                 </li>
@@ -116,15 +123,31 @@ function getTop(e){
         <span class="fr tl"><img src="/static/images/p.jpg"/> 认真填写还可以获得<em class="cs f16">10</em>积分啊</span>
     </div>
     <div class="w100 clearfix pt20 overflow">
-        <ul>
-            <li class="tl l-30">评价商品</li>
-            <li class="tl pt20">
-                <textarea class="p_jia"></textarea>
-            </li>
-            <li class="tl">
-                <input type="button" value="提交评价" class="tjdd fl"/>
-            </li>
-        </ul>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <ul>
+                <li class="tl l-30">{{cf.name.label}}</li>
+                <li class="tl pt20">
+                    {{cf.name}}
+                </li>
+                <li class="tl l-30">{{cf.email.label}}</li>
+                <li class="tl pt20">
+                    {{cf.email}}
+                </li>
+                <li class="tl l-30">{{cf.url.label}}</li>
+                <li class="tl pt20">
+                    {{cf.url}}
+                </li>
+                <li class="tl l-30">{{cf.body.label}}</li>
+                <li class="tl pt20">
+                    {{cf.body}}
+                </li>
+
+                <li class="tl">
+                    <input type="submit" value="提交评价" class="tjdd fl"/>
+                </li>
+            </ul>
+        </form>
     </div>
 </div>
 
@@ -147,6 +170,9 @@ con.style.display=i==cursel?"block":"none";
 }
 }
 //-->
+
+
+
 
 
         </script>
@@ -180,42 +206,20 @@ con.style.display=i==cursel?"block":"none";
 
                     <div class="pinglun_bot pb20">
                         <ul>
+                            {% for comment in curriculum.comment_set.all %}
+
                             <li>
-                                <h3 class="f14 huise tr l-26 ">刚刚</h3>
+                                <h3 class="f14 huise tr l-26 ">{{comment.create_time|date:'Y-m-d H:i:s'}}</h3>
+                                {{comment.name}}
                                 <span class="bg12_t"><img src="/static/images/p_r2_c2.jpg"/></span>
                                 <ol>
-                                    坚决支持中国政府严正立场，拥护习总书记谈话。
-                                    主权是不能谈判的，任何所谓仲裁都是无效的，废纸一张！
-                                    这个仲裁庭算什
+                                    {{comment.body}}
                                 </ol>
                             </li>
-                            <li>
-                                <h3 class="f14 huise tr l-26 ">刚刚</h3>
-                                <span class="bg12_t"></span>
-                                <ol>
-                                    坚决支持中国政府严正立场，拥护习总书记谈话。
-                                    主权是不能谈判的，任何所谓仲裁都是无效的，废纸一张！
-                                    这个仲裁庭算什
-                                </ol>
-                            </li>
-                            <li>
-                                <h3 class="f14 huise tr l-26 ">刚刚</h3>
-                                <span class="bg12_t"></span>
-                                <ol>
-                                    坚决支持中国政府严正立场，拥护习总书记谈话。
-                                    主权是不能谈判的，任何所谓仲裁都是无效的，废纸一张！
-                                    这个仲裁庭算什
-                                </ol>
-                            </li>
-                            <li>
-                                <h3 class="f14 huise tr l-26 ">刚刚</h3>
-                                <span class="bg12_t"></span>
-                                <ol>
-                                    坚决支持中国政府严正立场，拥护习总书记谈话。
-                                    主权是不能谈判的，任何所谓仲裁都是无效的，废纸一张！
-                                    这个仲裁庭算什
-                                </ol>
-                            </li>
+                            {% endfor %}
+
+
+
                         </ul>
                     </div>
 
