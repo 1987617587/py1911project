@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib.auth import login as lin, authenticate, logout as lout
-
+from django.db.models import Max,Sum,Min,Avg
 from qikuapp.forms import CommentForm
 from .models import *
 # 分页和分页器
@@ -24,7 +24,9 @@ def index(request):
 
 
 def contact(request):
-    return HttpResponse("联系我们")
+    # return HttpResponse("联系我们")
+    return render(request, 'base.html')
+
 
 
 def login(request):
@@ -177,6 +179,10 @@ def buy(request,c_id):
     except:
         error = "加入购物车失败"
     # curriculum = request.user.curriculum
+    money = request.user.curriculum.all().aggregate(Sum('price')).get("price__sum")
+    if not money:
+        money = 0
+    money_to_integral = money*0.1
     return render(request, '提交订单.html', locals())
 
 
