@@ -24,7 +24,8 @@
 
         <div class="wrapp overflow pt15">
             <ol class="fr overflow" style="width:100px">
-                <em class="t1"><a href="{% url 'qikuapp:buy' 0 %}" class="baise">{{request.user.curriculum.count}}</a></em>
+                <em class="t1"><a href="{% url 'qikuapp:buy' 0 %}"
+                                  class="baise">{{request.user.curriculum.count}}</a></em>
             </ol>
         </div>
         {% endif %}
@@ -34,13 +35,11 @@
             {% if request.user and request.user.username != ''%}
             <dl class="fl pl90 pt10 overflow w515 ">
                 <dt>
-                    <input type="text" class="ss_in" value="请输入关键字"
-                           onfocus="if(this.value=='请输入关键字'){this.value='';this.style.color='#333'}"
-                           onblur="if(this.value==''){this.value='请输入关键字';this.style.color='#aaa'}"
-                           x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword"/>
-                    <input type="button" class="an_bg"/>
-
-
+                    <br>
+                    <form role="search" method="get" id="searchform" action="/search/">
+                        <input class="ss_in" type="search" placeholder="搜索" required name="q">
+                        <button class="an_bg" type="submit"><span class="ion-ios-search-strong"></span></button>
+                    </form>
                 </dt>
                 <!--                <dd>-->
                 <!--                    {% for category in categories %}-->
@@ -50,14 +49,16 @@
                 <!--                </dd>-->
 
             </dl>
+
             {% else %}
             <dl class="fl pl90 pt10 overflow w515 ">
                 <dt>
-                    <br>
-                    <form role="search" method="get" id="searchform" action="/search/">
-                            <input  class="ss_in" type="search" placeholder="搜索" required name="q">
-                            <button class="an_bg" type="submit"><span class="ion-ios-search-strong"></span></button>
-                        </form>
+                    <input type="text" class="ss_in" value="请先登录或注册"
+                           onfocus="if(this.value=='请输入关键字'){this.value='';this.style.color='#333'}"
+                           onblur="if(this.value==''){this.value='请输入关键字';this.style.color='#aaa'}"
+                           x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword"/>
+                    <input type="button" class="an_bg"/>
+
                 </dt>
                 <!--                <dd>-->
                 <!--                    {% for category in categories %}-->
@@ -95,8 +96,8 @@
                         <a href="{% url 'qikuapp:login'%}">登录</a> | <a href="{% url 'qikuapp:register'%}"
                                                                        class="red">注册</a>
                     </ol>
-                    <em>{{request.user.name}}</em>
-                    <em>{{request.user}}</em>
+<!--                    <em>{{request.user.name}}</em>-->
+<!--                    <em>{{request.user}}</em>-->
                 </dt>
                 <dd><img src="/static/images/index_r6_c31.jpg"/></dd>
             </dl>
@@ -112,9 +113,9 @@
     <div class="nav_bg overflow  clearfix">
         <div class="wrappp">
             <ul>
-                <li style="background:none"><a href="#">首页 </a></li>
-                <li><a href="#">师资介绍信息 </a></li>
-                <li><a href="#">课程分类 </a></li>
+                <li style="background:none"><a href="{% url 'qikuapp:list'%}">首页 </a></li>
+                <li><a href="{% url 'qikuapp:list'%}">师资介绍信息 </a></li>
+                <li><a href="{% url 'qikuapp:list'%}">课程分类 </a></li>
                 <li><a href="{% url 'qikuapp:list'%}">所有课程 </a></li>
 
             </ul>
@@ -141,6 +142,7 @@ function getTop(e){
 	if(e.offsetParent != null) offset += getTop(e.offsetParent);
 	return offset;
 }
+
 
 
 
@@ -199,6 +201,7 @@ $(function(){
 		pauseOnAction: false
 	});
 });
+
 
 
 

@@ -113,10 +113,10 @@ function getTop(e){
                     {{c.introduce}}
                 </div>
                 <div class="w100 clearfix">
-                    <ol class="fr pt5">已报名:<em class="red">800</em></ol>
+                    <ol class="fr pt5">已报名:<em class="red">{{c.user_set.all.count}}</em></ol>
                 </div>
                 <div class="w100 pt5 overflow clearfix tl">
-                    授课时长：{{c.days}} &nbsp; &nbsp; &nbsp; &nbsp; 讲师：{{c.teacher}}
+                    授课时长：{{c.days}} (天)&nbsp; &nbsp; &nbsp; &nbsp; 讲师：{{c.teacher}}
                 </div>
             </div>
         </li>

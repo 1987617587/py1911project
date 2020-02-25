@@ -1,17 +1,314 @@
-<!DOCTYPE html>
-<html lang="en">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>搜索结果</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    {% if query %}-->
+<!--        <h3>搜索结果如下：</h3>-->
+<!--        {% for result in page.object_list %}-->
+<!--            <a href="#">  {{result.object.name}} </a><br/>-->
+<!--        {% empty %}-->
+<!--            <p>啥也没找到</p>-->
+<!--        {% endfor %}-->
+<!--    {% endif %}-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>搜索结果</title>
+    <meta name="keywords" content="在线讲堂,公开课,职场教育,培训机构,服务平台,HTML5网站模板"/>
+    <meta name="description" content="在线讲堂公开课职场教育培训机构服务平台HTML5网站模板下载。下载文件包含20张html网页模板，只提供首页在线演示，其他页面需自行下载后查看。"/>
+    <meta name="author" content="html中文网(www.html.cn)"/>
+    <meta name="copyright" content="html中文网(www.html.cn)"/>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-    {% if query %}
-        <h3>搜索结果如下：</h3>
+<!--标志搜索-->
+{% load myfun %}
+<div class="w100" id="inner" style="z-index: 1000000; position: static; top: 0px;">
+    <div class="log_bg overflow clearfix">
+        {# 订单数 #}
+        {% if request.user and request.user.username != ''%}
+
+        <div class="wrapp overflow pt15">
+            <ol class="fr overflow" style="width:100px">
+                <em class="t1"><a href="{% url 'qikuapp:buy' 0 %}"
+                                  class="baise">{{request.user.curriculum.count}}</a></em>
+            </ol>
+        </div>
+        {% endif %}
+
+        <div class="wrapp  ">
+            <p class="fl overflow"><img src="/static/images/index_r2_c6.jpg"/></p>
+            {% if request.user and request.user.username != ''%}
+            <dl class="fl pl90 pt10 overflow w515 ">
+                <dt>
+                    <br>
+                    <form role="search" method="get" id="searchform" action="/search/">
+                        <input class="ss_in" type="search" placeholder="搜索" required name="q">
+                        <button class="an_bg" type="submit"><span class="ion-ios-search-strong"></span></button>
+                    </form>
+                </dt>
+                <!--                <dd>-->
+                <!--                    {% for category in categories %}-->
+                <!--                    <a href="#" class="f12 huise">{{category.name}}</a>-->
+                <!--                    {% endfor %}-->
+
+                <!--                </dd>-->
+
+            </dl>
+
+            {% else %}
+            <dl class="fl pl90 pt10 overflow w515 ">
+                <dt>
+                    <input type="text" class="ss_in" value="请先登录或注册"
+                           onfocus="if(this.value=='请输入关键字'){this.value='';this.style.color='#333'}"
+                           onblur="if(this.value==''){this.value='请输入关键字';this.style.color='#aaa'}"
+                           x-webkit-grammar="bUIltin:search" x-webkit-speech="" maxlength="30" name="keyword"/>
+                    <input type="button" class="an_bg"/>
+
+                </dt>
+                <!--                <dd>-->
+                <!--                    {% for category in categories %}-->
+                <!--                    <a href="#" class="f12 huise">{{category.name}}</a>-->
+                <!--                    {% endfor %}-->
+
+                <!--                </dd>-->
+
+            </dl>
+            {% endif %}
+            <!--发布登录-->
+            {# 登录注册 #}
+            {% if request.user and request.user.username != ''%}
+            <!--              登录成功-->
+            <dl class="w336   pt10 fr">
+                <dt>
+                    <a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>
+                    <ol class="f18 fr   ty">
+                        {{request.user.username}}
+                        <em class="tl f14 l-30 w100">
+                            <img src="/static/images/yunketang_r12_c4.jpg" width="50" height="50" class="fl mr10"/>
+                            <a href="#" class="red">个人中心</a>
+                            <a href="{% url 'qikuapp:loginout' %}">退出</a>
+                        </em>
+
+                    </ol>
+                </dt>
+                <dd><img src="/static/images/index_r6_c31.jpg"/></dd>
+            </dl>
+            <!--              未登录-->
+            {% else %}
+            <dl class="w336 overflow  pt10 fr">
+                <dt><a href="#"><img src="/static/images/index_r4_c33.jpg" class="fl"/></a>
+                    <ol class="f18 fr overflow">
+                        <a href="{% url 'qikuapp:login'%}">登录</a> | <a href="{% url 'qikuapp:register'%}"
+                                                                       class="red">注册</a>
+                    </ol>
+                    <em>{{request.user.name}}</em>
+                    <em>{{request.user}}</em>
+                </dt>
+                <dd><img src="/static/images/index_r6_c31.jpg"/></dd>
+            </dl>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!--nav-->
+
+
+    <div class="nav_bg overflow  clearfix">
+        <div class="wrappp">
+            <ul>
+                <li style="background:none"><a href="{% url 'qikuapp:list'%}">首页 </a></li>
+                <li><a href="{% url 'qikuapp:list'%}">师资介绍信息 </a></li>
+                <li><a href="{% url 'qikuapp:list'%}">课程分类 </a></li>
+                <li><a href="{% url 'qikuapp:list'%}">所有课程 </a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var obj11 = document.getElementById("inner");
+var top11 = getTop(obj11);
+var isIE6 = /msie 6/i.test(navigator.userAgent);
+window.onscroll = function(){
+
+	var bodyScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	if (bodyScrollTop > top11){
+		obj11.style.position = (isIE6) ? "absolute" : "fixed";
+		obj11.style.top = (isIE6) ? bodyScrollTop + "px" : "0px";
+	} else {
+		obj11.style.position = "static";
+	}
+}
+function getTop(e){
+
+	var offset = e.offsetTop;
+	if(e.offsetParent != null) offset += getTop(e.offsetParent);
+	return offset;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<!--js-->
+
+<!--<div class="warpo">-->
+<!--    <div class="baoming overflow"><a href="#">公益</a> | <a href="#">公告</a> | <a href="#">新闻</a> | <a href="#">活动</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!-- 代码end -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.flexslider-min.js"></script>
+<script>
+$(function(){
+	$('.flexslider').flexslider({
+		directionNav: true,
+		pauseOnAction: false
+	});
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<!--ad-->
+<div class="w1000 clearfix overflow">
+    <p><img src="/static/images/index_r11_c1.jpg"/></p>
+</div>
+
+<div class="youthModel wrapp clearfix overflow">
+
+    <ul class="modelList">
+        {% if query %}
         {% for result in page.object_list %}
-            <a href="#">  {{result.object.name}} </a><br/>
+         <li class="clearfix">
+            <a target="_blank" class="modelImg" href="{% url 'qikuapp:detail' result.object.id %}"><img src="/static/images/martians_club.jpg"></a>
+            <div class="modelRight tl">
+                <a target="_blank" class="modelTitle" href="{% url 'qikuapp:detail' result.object.id %}">{{result.object.name}}</a>
+                <div class="modelIntro tl">
+                    {{result.object.introduce}}
+                </div>
+                <div class="w100 clearfix">
+                    <ol class="fr pt5">已报名:<em class="red">{{result.object.user_set.all.count}}</em></ol>
+                </div>
+                <div class="w100 pt5 overflow clearfix tl">
+                    授课时长：{{result.object.days}}(天) &nbsp; &nbsp; &nbsp; &nbsp; 讲师：{{result.object.teacher}}
+                </div>
+            </div>
+        </li>
         {% empty %}
-            <p>啥也没找到</p>
+        <p>啥也没找到</p>
         {% endfor %}
-    {% endif %}
+        {% endif %}
+
+
+    </ul>
+</div>
+
+<!--<div class="page pt30 overflow clearfix pb25 ">-->
+<!--    <ul>-->
+<!--        <li class="fl"><a href="###">上一页</a><a class="cur" href="###">1</a><a href="###">2</a><a href="###">3</a><a-->
+<!--                href="###">4</a><a href="###">5</a><a href="###">下一页</a></li>-->
+<!--        <li class="fr"><em class="fl">共5页 到&nbsp;<input name="" type="text" size="3" class="boderr"-->
+<!--                                                        style="height:30px"/>&nbsp;页</em> <a href="#"-->
+<!--                                                                                             class="cur fr">确定</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+
+<div class="bot_bg2 overflow clearfix "></div>
+
+
+<div class="hr w100 mt30 overflow clearfix"></div>
+
+<div class="wrap  pt30 overflow clearfix">
+
+
+    <div class="hr w100 mt15 overflow clearfix"></div>
+
+
+    <!--版权-->
+    <div class="copy_bg overflow clearfix w100">
+        <div class="wrap overflow baise ">
+            <p class="fl"><img src="/static/images/index_r42_c7.jpg"/></p>
+            <dl class="fl pl20">
+                <dt><a href="#">首页</a> <a href="#">培训信息</a> <a href="#">会议信息</a> <a href="#">专家信息</a> <a href="#">
+                    场地信息</a>
+                    <a href="#"> 在线培训</a> <a href="#"> 培训机构</a> <a href="#"> 培训联盟</a> <a href="#">人才招聘</a>
+                </dt>
+                <dd>
+                    &copy; 2019 XX公司&nbsp;&nbsp;ICP备XXXXXXXX号&nbsp;&nbsp;技术支持：<a href="https://www.html.cn/"
+                                                                                 title="html中文网"
+                                                                                 target="_blank">html中文网(www.html.cn)</a>
+                </dd>
+            </dl>
+            <ol class="fr">
+                <img src="/static/images/index_r42_c38.jpg"/>
+            </ol>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
