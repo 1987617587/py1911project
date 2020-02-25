@@ -147,7 +147,7 @@ $(function(){
         <!--left-->
         <div class="w400 fl overflow ">
             <div class="w100 bg_n1 overflow">
-                {% get_hot_curriculum as hot_curriculum%}
+                {% get_hot_curriculum as hot_curriculum %}
                 {% for curriculum in hot_curriculum%}
                 <a href="{% url 'qikuapp:detail' curriculum.id %}"><img src="/static/images/index_r23_c8.jpg"
                                                                         width="218"
@@ -161,7 +161,7 @@ $(function(){
             </div>
             <div class="w100 pt30 overflow clearfix">
                 <ul>
-                    {% get_latest_curriculum as latest_curriculum %}
+                    {% get_latest_curriculum 2 as latest_curriculum %}
 
                     {% for curriculum in latest_curriculum %}
                     <li><span>{{curriculum.create_time|date:'Y-m-d'}}</span><a

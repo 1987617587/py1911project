@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.contrib.auth import login as lin, authenticate, logout as lout
-from django.db.models import Max,Sum,Min,Avg
+from django.db.models import Max, Sum, Min, Avg
 from qikuapp.forms import CommentForm
 from .models import *
 # 分页和分页器
@@ -26,7 +26,6 @@ def index(request):
 def contact(request):
     # return HttpResponse("联系我们")
     return render(request, 'base.html')
-
 
 
 def login(request):
@@ -70,8 +69,14 @@ def register(request):
                 # return HttpResponse("密码不一致")
                 error = "两次密码输入不一致"
                 return render(request, '注册.html', locals())
+            elif User.objects.filter(username=telephone):
+                error = "用户名已存在"
+                return render(request, '注册.html', locals())
             else:
-                User.objects.create_user(username=telephone, password=password)
+                try:
+                    User.objects.create_user(username=telephone, password=password)
+                except:
+                    error = "注册失败"
                 return render(request, '登录.html')
         error = "必须输入手机号（用户名）、邮箱和密码"
         return render(request, '注册.html', locals())
@@ -165,11 +170,11 @@ def detail(request, c_id):
                 errors = "输入格式有误！"
                 return render(request, '购买页面.html', locals())
     else:
-        url = reverse('qikuapp:login')+'?next=/detail/'+c_id+'/'
+        url = reverse('qikuapp:login') + '?next=/detail/' + c_id + '/'
         return redirect(to=url)
 
 
-def buy(request,c_id):
+def buy(request, c_id):
     # 购物车
     user = request.user
     try:
@@ -182,7 +187,7 @@ def buy(request,c_id):
     money = request.user.curriculum.all().aggregate(Sum('price')).get("price__sum")
     if not money:
         money = 0
-    money_to_integral = money*0.1
+    money_to_integral = money * 0.1
     return render(request, '提交订单.html', locals())
 
 

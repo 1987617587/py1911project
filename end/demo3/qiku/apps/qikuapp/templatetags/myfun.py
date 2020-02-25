@@ -5,7 +5,7 @@ from ..models import *
 register = Library()
 
 
-# 使用装饰器
+# 使用装饰器装饰标签
 @register.filter
 def date_format(date):
     return "%d-%d-%d" % (date.year, date.month, date.day)

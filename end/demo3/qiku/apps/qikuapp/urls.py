@@ -1,6 +1,7 @@
-from django.conf.urls import url,include
+from django.conf.urls import url, include
 from django.views.generic.base import RedirectView
 from . import views
+from .feed import CurriculumFeed
 
 app_name = 'qikuapp'
 
@@ -17,5 +18,5 @@ urlpatterns = [
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^favicon.ico$', views.favicon, name='favicon'),
     url(r'^search/', include('haystack.urls')),
-# url(r'^rss/$', ArticleFeed(),name='rss'),
+    url(r'^rss/$', CurriculumFeed(), name='rss'),
 ]
