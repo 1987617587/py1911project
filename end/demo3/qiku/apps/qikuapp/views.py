@@ -31,12 +31,30 @@ def login(request):
 def list(request):
     ads2 = Ads2.objects.all()
     type_page = request.GET.get("type")
+    category_id, teacher_id, price_id = None, None, None
     if type_page == "category":
-        pass
+        category_id = request.GET.get("category_id")
+        try:
+            category = Category.objects.get(id=category_id)
+            curriculum = category.curriculum_set.all()
+        except:
+            return HttpResponse("标签不合法！")
+    elif type_page == "teacher":
+        teacher_id = request.GET.get("teacher_id")
+        try:
+            teacher = Teacher.objects.get(id=teacher_id)
+            curriculum = teacher.curriculum_set.all()
+        except:
+            return HttpResponse("标签不合法！")
+    elif type_page == "price":
+        curriculum_price = request.GET.get("curriculum_price")
+
+        curriculum = Curriculum.objects.filter(price=curriculum_price)
+
     else:
-        pass
+        curriculum = Curriculum.objects.all()
     teachers = Teacher.objects.all()
-    curriculum = Curriculum.objects.all()
+
     categories = Category.objects.all()
     # 分页器
     paginator = Paginator(curriculum, 2)

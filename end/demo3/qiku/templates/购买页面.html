@@ -55,7 +55,7 @@ function getTop(e){
 <script type="text/javascript" src="/static/js/zzsc.js"></script>
 <!--路径-->
 <div class="wrapp pt10 overflow clearfix f18 l-35">
-    <p class="fl"><img src="/static/images/t.jpg" class="fl pt15 pr10"/> <a href="#">首页</a> > {{curriculum.teacher}} >
+    <p class="fl"><img src="/static/images/t.jpg" class="fl pt15 pr10"/> <a href="/list">首页</a> > <a href="/list?type=teacher&teacher_id={{curriculum.teacher.id}}">{{curriculum.teacher}}</a> >
         <em class="red">{{curriculum.name}}</em></p>
 </div>
 
@@ -68,7 +68,7 @@ function getTop(e){
                 src="/static/images/goumai_r3_c7.jpg"/> ({{curriculum.teacher.stars}}) &nbsp;&nbsp;|&nbsp; &nbsp;239490人学习
         </ol>
         <ul>
-            <li class="pt5">价格:<em class="red f18">￥49</em></li>
+            <li class="pt5">价格:<em class="red f18">￥{{curriculum.price}}</em></li>
             <li class="pt5">课程说明:{{curriculum.introduce}}</li>
             <li class="pt5">服费特权:<span class="tl"><img src="/static/images/goumai_r5_c8.jpg "/> 24小时内讲师答疑</span> <span
                     class="tl"><img src="/static/images/goumai_r5_c13.jpg "/>所有课时永久免费 <img

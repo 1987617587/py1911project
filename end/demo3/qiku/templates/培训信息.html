@@ -71,7 +71,7 @@ function getTop(e){
         <dt>课程分类</dt>
         <dd>
             {% for category in categories %}
-            <a href="#">{{category.name}}</a>
+            <a href="/list?type=category&category_id={{category.id}}">{{category.name}}</a>
 
             {% endfor %}
         </dd>
@@ -81,7 +81,7 @@ function getTop(e){
         <dd>
             {% get_latest_curriculum_price as curriculum%}
             {% for curriculum in curriculum %}
-            <a href="#">{{curriculum.price}}</a>
+            <a href="/list?type=price&curriculum_price={{curriculum.price}}">{{curriculum.price}}</a>
 
             {% endfor %}
         </dd>
@@ -90,7 +90,7 @@ function getTop(e){
         <dt>教师课程</dt>
         <dd>
             {% for teacher in teachers %}
-            <a href="#">{{teacher.name}}</a>
+            <a href="/list?type=teacher&teacher_id={{teacher.id}}">{{teacher.name}}</a>
 
             {% endfor %}
         </dd>
@@ -130,18 +130,18 @@ function getTop(e){
     <ul>
         <li class="fl">
             {% if page.has_previous %}
-            <a href="/list?pagenum={{page.previous_page_number}}&type={{type_page}}">上一页</a>
+            <a href="/list?pagenum={{page.previous_page_number}}&type={{type_page}}&category_id={{category_id}}&teacher_id={{teacher_id}}">上一页</a>
             {% endif %}
             {% for pn in page.paginator.page_range %}
             {% if pn == page.number %}
-            <a class="cur" href="/list?pagenum={{pn}}&type={{type_page}}">{{pn}}</a>
+            <a class="cur" href="/list?pagenum={{pn}}&type={{type_page}}&category_id={{category_id}}&teacher_id={{teacher_id}}">{{pn}}</a>
             {% else %}
-            <a href="/list?pagenum={{pn}}&type={{type_page}}">{{pn}}</a>
+            <a href="/list?pagenum={{pn}}&type={{type_page}}&category_id={{category_id}}&teacher_id={{teacher_id}}">{{pn}}</a>
             {% endif %}
             {% endfor %}
             {% if page.has_next %}
 
-            <a href="/list?pagenum={{page.next_page_number}}&type={{type_page}}">下一页</a>
+            <a href="/list?pagenum={{page.next_page_number}}&type={{type_page}}&category_id={{category_id}}&teacher_id={{teacher_id}}">下一页</a>
             {% endif %}
 
         </li>
