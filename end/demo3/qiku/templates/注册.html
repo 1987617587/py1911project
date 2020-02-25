@@ -1,106 +1,120 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>注册</title>
-<link href="/static/css/login.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>注册</title>
+    <link href="/static/css/login.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="login-headbox" data-gct="1">
-        <div class="login-head clearfix" data-gct="1">
-            <div class="login-logo-box fl clearfix">
-                <a target="_blank" href="http://www.#.com" class="login-logo fl"><img src="/static/images/logr2_c2.jpg" /></a>
-                <h1 class="fl">会员注册</h1>
-            </div>
-            <a target="_blank" class="help-center fr" href="http://help.gongchang.com">帮助中心</a>
+    <div class="login-head clearfix" data-gct="1">
+        <div class="login-logo-box fl clearfix">
+            <a target="_blank" href="http://www.#.com" class="login-logo fl"><img
+                    src="/static/images/logr2_c2.jpg"/></a>
+            <h1 class="fl">会员注册</h1>
         </div>
+        <a target="_blank" class="help-center fr" href="http://help.gongchang.com">帮助中心</a>
     </div>
-    
-  <div class="login-box" data-gct="2">
-        
-        <div class="reg-content" data-gct="2">
-            <div class="reg-content-tipbox">
-                <span class="reg-content-tip">为您提供适用于个人采购从业者的完整采购及管理服务。诚信品质供应商<a href="https://work.gongchang.com/account/register">点这里入驻</a>。</span>
-            </div>
-            <div class="regtype-content">
-                <form method="post" action="/login/reg/doreg/" id="preg-mobi" class="nice-validator n-default" novalidate="novalidate">
+</div>
+
+<div class="login-box" data-gct="2">
+
+    <div class="reg-content" data-gct="2">
+        <div class="reg-content-tipbox">
+            <span class="reg-content-tip">为您提供适用于个人采购从业者的完整采购及管理服务。诚信品质供应商<a
+                    href="https://work.gongchang.com/account/register">点这里入驻</a>。</span>
+        </div>
+        <div class="regtype-content">
+            <form method="post" action="#" id="preg-mobi" class="nice-validator n-default" novalidate="novalidate">
+                {% csrf_token %}
                 <div class="lbc-box">
-                                        <div class="lbc-row">
+                    <div class="lbc-row">
                         <label class="lbc-name"><em>*</em>&nbsp;手机号码：</label>
-                                                <input type="text" data-checkurl="/login/reg/checkmobile/" value="" name="mobile" placeholder="注册后可使用手机号码直接登录" class="lbc-ipt mustnumber" aria-required="true">
-                                            </div>
+                        <input type="text" data-checkurl="/login/reg/checkmobile/" value="" name="telephone"
+                               placeholder="注册后可使用手机号码直接登录" class="lbc-ipt mustnumber" aria-required="true">
+                    </div>
                     <div class="lbc-row">
                         <label class="lbc-name"><em>*</em>&nbsp;电子邮箱：</label>
-                                                <input type="text" value="" name="email" placeholder="用于接收询价后供应商的回复" data-checkurl="/login/reg/checkemail/" class="lbc-ipt" aria-required="true">
-                                            </div>
+                        <input type="text" value="" name="email" placeholder="用于接收询价后供应商的回复"
+                               data-checkurl="/login/reg/checkemail/" class="lbc-ipt" aria-required="true">
+                    </div>
                     <div class="lbc-row">
                         <label class="lbc-name"><em>*</em>&nbsp;密码：</label>
-                                                <input type="password" name="password" placeholder="" class="lbc-ipt" aria-required="true">
-                                            </div>
+                        <input type="password" name="password" placeholder="" class="lbc-ipt" aria-required="true">
+                    </div>
                     <div class="lbc-row">
                         <label class="lbc-name"><em>*</em>&nbsp;确认密码：</label>
-                                                <input type="password" name="repassword" placeholder="" class="lbc-ipt" aria-required="true">
-                                            </div>
+                        <input type="password" name="repassword" placeholder="" class="lbc-ipt" aria-required="true">
+                    </div>
                     <div class="lbc-row">
                         <label class="lbc-name"><em>*</em>&nbsp;手机验证码：</label>
-                                                <input type="text" name="verifycode" placeholder="请输入手机收到的验证码" class="lbc-ipt short" aria-required="true" data-target=".verifycode-msgbox">
+                        <input type="text" name="verifycode" placeholder="请输入手机收到的验证码" class="lbc-ipt short"
+                               aria-required="true" data-target=".verifycode-msgbox">
                         <button type="button" class="lbc-sbtn js-getcheckcode-btn">获得验证码</button>
-						<span class="verifycode-msgbox"></span>
-                                            </div>
+                        <span class="verifycode-msgbox"></span>
+                    </div>
                 </div>
                 <div class="lbc-obox">
                     <div class="lbc-row btn-box">
                         <input type="hidden" value="person" name="group">
                         <input type="hidden" value="0" name="fromwhere">
                         <input type="hidden" value="0" name="regtype">
-                        <button id="gongchang_person_reg" type="submit" class="lbc-loginnow" tj-event="md5iwoK+T0aGeBQwOC3GUHBa/1H+i9ZpSxq9PUl9fBg=">立即注册</button>
+                        <button id="gongchang_person_reg" type="submit" class="lbc-loginnow"
+                                tj-event="md5iwoK+T0aGeBQwOC3GUHBa/1H+i9ZpSxq9PUl9fBg=">立即注册
+                        </button>
+                        <em>{{error}}</em>&nbsp;
                     </div>
                     <div class="lbc-row lbc-fj reg-xy clearfix">
-                        <span class="fl">接受训训网<a target="_blank" href="http://help.gongchang.com/question/about/204.html">《注册协议》</a></span>
-                        <span class="fr">已有账号？<a href="/login.html">登录</a>&gt;</span>
+                        <span class="fl">接受训训网<a target="_blank"
+                                                 href="http://help.gongchang.com/question/about/204.html">《注册协议》</a></span>
+                        <span class="fr">已有账号？<a href="{% url 'qikuapp:login' %}">登录</a>&gt;</span>
                     </div>
                 </div>
-                </form>
-            </div>
+            </form>
         </div>
-        <script type="text/html" id="sendCheckCode-tmpl">
-            &lt;div class="lbc-checkcode"&gt;
-            	&lt;div class="lbcc-title clearfix"&gt;&lt;a class="closedialog fr" href="javascript:;"&gt;X&lt;/a&gt;&lt;/div&gt;
-            	&lt;div class="lbcc-content"&gt;
-            		&lt;div class="lbcc-fbox"&gt;
-            			&lt;form id="checkcodedialogform" action="/login/reg/sendmobilecode/?tpltype=reg"&gt;
-            				&lt;div class="lbcc-row"&gt;
-            					&lt;label&gt;您的手机号码：&lt;/label&gt;
-            					&lt;span class="js-phonenum"&gt;&lt;/span&gt;
-            					&lt;input id="js-mustnumber" type="hidden"&gt;
-            				&lt;/div&gt;
-            				&lt;div class="lbcc-row"&gt;
-            					&lt;label&gt;输入验证码：&lt;/label&gt;
-            					&lt;input class="lbcc-ipt short" name="vcode"&gt;
-            					&lt;img class="lbcc-codeimg js-vcode" src="/code.html" data-src="/code.html"&gt;&lt;a class="js-vcode" href="javascript:;"  style="font-size:12px;"&gt;换一张&lt;/a&gt;
-            				&lt;/div&gt;
-            				&lt;div class="lbcc-row" style="display: none;"&gt;
-            					&lt;label&gt;&lt;/label&gt;
-            					&lt;span class="tips"&gt;&lt;/span&gt;
-            				&lt;/div&gt;
-            				&lt;div class="lbcc-row"&gt;
-            					&lt;label&gt;&lt;/label&gt;
-            					&lt;button id="sendsms-btn" class="lbcc-btn" type="button"&gt;提交&lt;/button&gt;
-            				&lt;/div&gt;
-            			&lt;/form&gt;
-            		&lt;/div&gt;
-            	&lt;/div&gt;
-            &lt;/div&gt;
-        </script>
     </div>
-    
-    
-    <div class="login-footer" data-gct="3">
-        <div class="gci-href" data-gct="1">
-            <a target="_blank" href="http://www.gongchang.com/about/">网站首页</a><a target="_blank" href="http://seller.gongchang.com/dianjintai/">客服中心</a>|<a target="_blank" href="http://help.gongchang.com/service/">问题反馈</a>
-        </div>
-        <div class="gci-copyright" data-gct="2">Copyright &copy; 2008-2016 GongcChang.com  All Rights Reserved 木制快搜版权所有   豫ICP备11020782号-14 <span id="gc_com_runtime">6.17ms</span> </div>
-    </div>    
+    <script type="text/html" id="sendCheckCode-tmpl">
+        &lt;div class="lbc-checkcode"&gt;
+        &lt;div class="lbcc-title clearfix"&gt;&lt;a class="closedialog fr" href="javascript:;"&gt;X&lt;/a&gt;&lt;/div&gt;
+        &lt;div class="lbcc-content"&gt;
+        &lt;div class="lbcc-fbox"&gt;
+        &lt;form id="checkcodedialogform" action="/login/reg/sendmobilecode/?tpltype=reg"&gt;
+        &lt;div class="lbcc-row"&gt;
+        &lt;label&gt;您的手机号码：&lt;/label&gt;
+        &lt;span class="js-phonenum"&gt;&lt;/span&gt;
+        &lt;input id="js-mustnumber" type="hidden"&gt;
+        &lt;/div&gt;
+        &lt;div class="lbcc-row"&gt;
+        &lt;label&gt;输入验证码：&lt;/label&gt;
+        &lt;input class="lbcc-ipt short" name="vcode"&gt;
+        &lt;img class="lbcc-codeimg js-vcode" src="/code.html" data-src="/code.html"&gt;&lt;a class="js-vcode" href="javascript:;"  style="font-size:12px;"&gt;换一张&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;div class="lbcc-row" style="display: none;"&gt;
+        &lt;label&gt;&lt;/label&gt;
+        &lt;span class="tips"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="lbcc-row"&gt;
+        &lt;label&gt;&lt;/label&gt;
+        &lt;button id="sendsms-btn" class="lbcc-btn" type="button"&gt;提交&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+    </script>
+</div>
+
+
+<div class="login-footer" data-gct="3">
+    <div class="gci-href" data-gct="1">
+        <a target="_blank" href="http://www.gongchang.com/about/">网站首页</a><a target="_blank"
+                                                                             href="http://seller.gongchang.com/dianjintai/">客服中心</a>|<a
+            target="_blank" href="http://help.gongchang.com/service/">问题反馈</a>
+    </div>
+    <div class="gci-copyright" data-gct="2">Copyright &copy; 2008-2016 GongcChang.com All Rights Reserved 木制快搜版权所有
+        豫ICP备11020782号-14 <span id="gc_com_runtime">6.17ms</span></div>
+</div>
 </body>
 </html>

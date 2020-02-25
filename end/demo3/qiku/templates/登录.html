@@ -1,62 +1,79 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>登录</title>
-<link href="/static/css/login.css" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>登录</title>
+    <link href="/static/css/login.css" rel="stylesheet">
 </head>
 
 <body>
 <div class="login-headbox" data-gct="1">
-        <div class="login-head clearfix" data-gct="1">
-            <div class="login-logo-box fl clearfix">
-                <a target="_blank" href="http://www.#.com" class="login-logo fl"><img src="/static/images/logr2_c2.jpg"  style="padding-top:3px; padding-left:10px"/></a>
-                <h1 class="fl">会员登录</h1>
-            </div>
-            <a target="_blank" class="help-center fr" href="http://help.gongchang.com">帮助中心</a>
+    <div class="login-head clearfix" data-gct="1">
+        <div class="login-logo-box fl clearfix">
+            <a target="_blank" href="http://www.#.com" class="login-logo fl"><img src="/static/images/logr2_c2.jpg"
+                                                                                  style="padding-top:3px; padding-left:10px"/></a>
+            <h1 class="fl">会员登录</h1>
         </div>
+        <a target="_blank" class="help-center fr" href="http://help.gongchang.com">帮助中心</a>
     </div>
-    
-  <div class="login-box login" data-gct="2" style="margin-top:140px">
-        <div class="lb-title" data-gct="1">
-                        <h1>你必须要登陆才能进行下一步操作</h1>
-                        <a href="https://work.gongchang.com" target="_blank" class="lbt-reg">供应商登录</a>
-        </div>
-        <form method="post" action="/login.html" id="login_form" class="nice-validator n-default" novalidate="novalidate">
+</div>
+
+<div class="login-box login" data-gct="2" style="margin-top:140px">
+    <div class="lb-title" data-gct="1">
+        <h1>你必须要登陆才能进行下一步操作</h1>
+        <a href="https://work.gongchang.com" target="_blank" class="lbt-reg">供应商登录</a>
+    </div>
+    <form method="post" action="#" id="login_form" class="nice-validator n-default" novalidate="novalidate">
+        {% csrf_token %}
+
         <div class="lb-content">
             <div class="lbc-box">
                 <div class="lbc-row">
                     <label class="lbc-name">采购会员帐号：</label>
-                    <input type="text" name="username" placeholder="手机/邮箱/用户名" class="lbc-ipt n-invalid" aria-required="true" aria-invalid="true" data-inputstatus="error"><span class="msg-box n-right" style="" for="username"><span role="alert" class="msg-wrap n-error"><span class="n-icon"></span></span></span>
+                    <input type="text" name="username" placeholder="手机/邮箱/用户名" class="lbc-ipt n-invalid"
+                           aria-required="true" aria-invalid="true" data-inputstatus="error"><span
+                        class="msg-box n-right" style="" for="username"><span role="alert"
+                                                                              class="msg-wrap n-error"><span
+                        class="n-icon"></span></span></span>
                 </div>
                 <div class="lbc-row login-password">
                     <label class="lbc-name">密码：</label>
                     <input type="password" name="password" placeholder="请输入您的密码" class="lbc-ipt" aria-required="true">
                     <a href="/forget.html" class="login-pwd-forget">忘记密码？</a>
                 </div>
-                                            </div>
+            </div>
             <div class="lbc-obox">
                 <div class="lbc-row lbc-fj clearfix">
                     <label class="fl"><input type="checkbox" value="1" name="remember"> 7天内记住我</label>
-                    <span class="fr">没有帐号？<a href="/reg.html">立即注册</a></span>
+                    <span class="fr">没有帐号？<a href="{% url 'qikuapp:register' %}">立即注册</a></span>
                 </div>
                 <div class="lbc-row btn-box">
-                    <input type="hidden" value="https://i.gongchang.com//static.gcimg.net/i/201508/3VbnieYLc4.png8.png" name="url">
-<!--                    <button type="submit" class="lbc-loginnow">立即登录</button>-->
-                    <button type="submit" class="lbc-loginnow"><a href="{% url 'qikuapp:list' %}">模拟登录</a></button>
+                    <input type="hidden" value="https://i.gongchang.com//static.gcimg.net/i/201508/3VbnieYLc4.png8.png"
+                           name="url">
+                    <button type="submit" class="lbc-loginnow">立即登录</button>
+                    <em>{{error}}</em>
+
+                    <em>{{request.user}}</em>
+                    <em>{{user}}</em>
+                    {{user.username}}
+                    <!--                    <button type="submit" class="lbc-loginnow"><a href="{% url 'qikuapp:list' %}">模拟登录</a></button>-->
                 </div>
             </div>
         </div>
-        </form>
+    </form>
+</div>
+
+
+<div class="login-footer" data-gct="3" style="margin-top:180px">
+    <div class="gci-href" data-gct="1">
+        <a target="_blank" href="http://www.gongchang.com/about/">网站首页</a>|<a target="_blank"
+                                                                              href="http://seller.gongchang.com/dianjintai/">客服中心</a>|<a
+            target="_blank" href="http://help.gongchang.com/service/">问题反馈</a>
     </div>
-    
-    
-    <div class="login-footer" data-gct="3" style="margin-top:180px">
-        <div class="gci-href" data-gct="1">
-            <a target="_blank" href="http://www.gongchang.com/about/">网站首页</a>|<a target="_blank" href="http://seller.gongchang.com/dianjintai/">客服中心</a>|<a target="_blank" href="http://help.gongchang.com/service/">问题反馈</a>
-        </div>
-        <div class="gci-copyright" data-gct="2">Copyright &copy; 2008-2016 GongcChang.com  All Rights Reserved 训训网权所有   豫ICP备11020782号-14 <span id="gc_com_runtime">6.17ms</span> </div>
-    </div>
-    
+    <div class="gci-copyright" data-gct="2">Copyright &copy; 2008-2016 GongcChang.com All Rights Reserved 训训网权所有
+        豫ICP备11020782号-14 <span id="gc_com_runtime">6.17ms</span></div>
+</div>
+
 </body>
 </html>

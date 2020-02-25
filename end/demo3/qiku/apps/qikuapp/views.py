@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
+from django.contrib.auth import login as lin,authenticate,logout as lout
 
 from qikuapp.forms import CommentForm
 from .models import *
@@ -11,6 +12,7 @@ from django.core.paginator import Page, Paginator
 
 
 def index(request):
+    # 未登录展示部分功能，诱导游客登录 登陆后跳转list页面展示全部数据
     # return HttpResponse("首页")
     ads = Ads.objects.all()
 
@@ -26,14 +28,48 @@ def contact(request):
 
 
 def login(request):
-    return render(request, '登录.html', locals())
+    if request.method == "GET":
+        return render(request, '登录.html', locals())
+    elif request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user = authenticate(username=username, password=password)
+            # user = User.objects.get(username=username)
+            print("找到用户",user)
+            print(user.username)
+            print(user.password)
+            url = reverse("qikuapp:list")
+            return redirect(to=url)
+            # return render(request, '培训信息.html', locals())
+        except:
+            print("未找到相应用户，登录失败")
+            error = "用户名或密码错误,登录失败"
+            return render(request, '登录.html', locals())
 
 
 def register(request):
-    return render(request, '注册.html', locals())
+    if request.method == "GET":
+        return render(request, '注册.html', locals())
+    elif request.method == "POST":
+        print(request.POST.get('telephone'))
+        telephone = request.POST.get('telephone')
+        password = request.POST.get('password')
+        repassword = request.POST.get('repassword')
+        if telephone and password and repassword:
+            if password != repassword:
+                # return HttpResponse("密码不一致")
+                error = "两次密码输入不一致"
+                return render(request, '注册.html', locals())
+            else:
+                User.objects.create_user(username=telephone, password=password)
+                return render(request, '登录.html')
+        error = "必须输入手机号（用户名）、邮箱和密码"
+        return render(request, '注册.html', locals())
 
 
 def list(request):
+    # 登陆后展示全部数据
     ads2 = Ads2.objects.all()
     type_page = request.GET.get("type")
     category_id, teacher_id, price_id = None, None, None
