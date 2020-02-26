@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+
+
 class CategorySerializer(serializers.ModelSerializer):
     """
     编写针对Category模型类的序列化类 继承serializers.ModelSerializer
@@ -7,10 +9,23 @@ class CategorySerializer(serializers.ModelSerializer):
     在Meta类中 model指明序列化模型 fields指明序列化字段
     """
 
+    # goods 一定要和模型类定义的关联字段related_name保持一致
+    # StringRelatedField()  可以显示关联模型中的__str__返回值  many=True 代表多个对象
+    # goods = serializers.StringRelatedField(many=True)
+    #  PrimaryKeyRelatedField() 返回主键  read_only=True代表只读
+    # goods = serializers.PrimaryKeyRelatedField(many=True,read_only=True)
+    # HyperlinkedRelatedField() 返回主键对应的详情路由
+    # goods = serializers.HyperlinkedRelatedField(view_name='good-detail',many=True,read_only=True)
+    # goods = serializers.HyperlinkedIdentityField(view_name='good-detail',many=True,read_only=True)
+
+    # HyperlinkedRelatedField() 返回主键对应的详情路由
+    # goods = serializers.HyperlinkedRelatedField(view_name='good-detail',many=True,read_only=True)
+    goods = serializers.HyperlinkedIdentityField(view_name='good-detail', many=True, read_only=True)
+
     class Meta:
         model = Category
         # fields = '__all__'
-        fields = ('name',)
+        fields = ('name', 'goods')
 
 
 class GoodSerializer(serializers.ModelSerializer):
