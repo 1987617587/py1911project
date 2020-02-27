@@ -13,23 +13,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from django.views.static import serve
+
+from drfend.settings import MEDIA_ROOT
 from shop.views import *
 # 引入DRF自带的路由类
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 # 可以通过router默认路由注册资源
-router.register('category', CategoryViewSets)
-router.register('good', GoodViewsSets)
-
+router.register('categories', CategoryViewSets)
+router.register('goods', GoodViewsSets)
+router.register('images', GoodImagesViewsSets)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('api/v1/', include(router.urls)),
     path('', include(router.urls)),
-
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     # 为了在DRF路由调试页面 需要引入以下路由
     # path('', include('rest_framework.urls')),
 ]
