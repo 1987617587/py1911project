@@ -32,8 +32,11 @@ router.register('images', GoodImagesViewsSets)
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('api/v1/', include(router.urls)),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
+
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+    url(r'^category_list/$', category_list, name="category_list"),
+    url(r'^category_detail/(\d+)/$', category_detail, name="category_detail"),
     # 为了在DRF路由调试页面 需要引入以下路由
     # path('', include('rest_framework.urls')),
 ]
