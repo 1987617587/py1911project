@@ -1,3 +1,4 @@
+from django.contrib.auth import hashers
 from rest_framework import serializers
 from .models import *
 

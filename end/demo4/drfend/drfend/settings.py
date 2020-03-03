@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'rest_framework',
+    'rest_framework_jwt',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,22 @@ MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media')]
 REST_FRAMEWORK = {
     # Schema
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
+    # 全局配置 优先级高于视图类的配置
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 3.使用JWT认证 json web token 不属于在数据库中存放 通过特殊的加密算法进行加密
+        # 配置
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 2.cookie 和 session 认证(一般) cookie是存储在浏览器上的非敏感数据，session是存储在浏览器上的敏感数据
+        # 发起请求时需要在cookie中携带sessionid  csrftoken 在header中 携带X-CSRFToken 这些值可以在浏览器登录之后的cookie中复制
+        'rest_framework.authentication.SessionAuthentication',
+        # 1.Basic认证(最简单)
+        # 将请求中携带HTTP_AUTHORIZATION 的类似于basic特殊编码的字符串 进行解码得到相应的用户 然后对用户进行认证
+        'rest_framework.authentication.BasicAuthentication'
+    ],
+
 }
 
 AUTH_USER_MODEL = "shop.User"

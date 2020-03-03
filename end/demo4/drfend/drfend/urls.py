@@ -41,5 +41,5 @@ urlpatterns = [
     # url(r'^category_list/$', CategoryListView.as_view(), name="category_list"),
     # url(r'^category_detail/(?P<pk>\d+)/$', CategoryDetailView.as_view(), name="category_detail"),
     # 为了在DRF路由调试页面 需要引入以下路由
-    # path('', include('rest_framework.urls')),
+    path('', include('rest_framework.urls')),
 ]

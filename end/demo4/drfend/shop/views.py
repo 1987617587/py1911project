@@ -4,7 +4,7 @@ from django.views import View
 from rest_framework import mixins, permissions
 
 from rest_framework import viewsets, generics
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
@@ -35,6 +35,24 @@ class GoodImagesViewsSets(viewsets.ModelViewSet):
 
 
 class UserViewsSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                     mixins.DestroyModelMixin):
+    """
+    声明用户操作  获取 添加 更新 删除
+    """
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    # 添加自定义注册路由
+    @action(methods=['POST'], detail=False)
+    def register(self, request):
+        seria = UserRegisterSerializer(data=request.data)
+        seria.is_valid(raise_exception=True)
+        seria.save()
+        # return Response("创建成功")
+        return Response(seria.data, status=status.HTTP_201_CREATED)
+
+
+class UserViewsSets1(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin):
     """
     声明用户操作 获取 更新 删除
@@ -64,15 +82,6 @@ class OrderViewsSets(viewsets.ModelViewSet):
             return [mypermissions.OrdersPermission()]
         else:
             return [permissions.IsAdminUser()]
-
-
-
-
-
-
-
-
-
 
 
 # 使用视图函数  调用装饰器api_view
