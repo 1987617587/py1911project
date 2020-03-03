@@ -28,7 +28,8 @@ router = routers.DefaultRouter()
 router.register('categories', CategoryViewSets)
 router.register('goods', GoodViewsSets)
 router.register('images', GoodImagesViewsSets)
-
+router.register('users', UserViewsSets)
+router.register('orders', OrderViewsSets)
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('api/v1/', include(router.urls)),

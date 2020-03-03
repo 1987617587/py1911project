@@ -117,3 +117,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIAFILES_DIRS = [os.path.join(BASE_DIR, 'media')]
+
+# 全局配置
+# 此处可以对DjangoRestFrameWork重新配置
+REST_FRAMEWORK = {
+    # Schema
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
+}
+
+AUTH_USER_MODEL = "shop.User"

@@ -1,14 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from rest_framework import mixins
+from rest_framework import mixins, permissions
 
 from rest_framework import viewsets, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-
+from . import permissions as mypermissions
 from .models import *
 from .serializers import *
 
@@ -32,6 +32,47 @@ class GoodViewsSets(viewsets.ModelViewSet):
 class GoodImagesViewsSets(viewsets.ModelViewSet):
     queryset = GoodImages.objects.all()
     serializer_class = GoodImagesSerializer
+
+
+class UserViewsSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin):
+    """
+    声明用户操作 获取 更新 删除
+    此处更新的用户密码是没有加密的
+    """
+    queryset = User.objects.all()
+
+    def get_serializer_class(self):
+        print("", self.action)
+        if self.action == "create":
+            return UserRegisterSerializer
+        return UserSerializer
+
+
+class OrderViewsSets(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    # permission_classes = [permissions.OrdersPermission]
+
+    def get_permissions(self):
+        print("当前http方法为", self.action)
+        if self.action == "create":
+            return [permissions.IsAuthenticated()]
+        elif self.action == "update" or self.action == "partial_update" or \
+                self.action == 'retrieve' or self.action == "destroy":
+            return [mypermissions.OrdersPermission()]
+        else:
+            return [permissions.IsAdminUser()]
+
+
+
+
+
+
+
+
+
 
 
 # 使用视图函数  调用装饰器api_view

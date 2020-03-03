@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -20,4 +21,18 @@ class Good(models.Model):
 
 class GoodImages(models.Model):
     img = models.ImageField(upload_to="imgs", verbose_name="商品图片")
-    good = models.ForeignKey(Good, on_delete=models.CASCADE, verbose_name="所属商品",related_name='images')
+    good = models.ForeignKey(Good, on_delete=models.CASCADE, verbose_name="所属商品", related_name='images')
+
+
+# 用户类
+class User(AbstractUser):
+    tel = models.CharField(max_length=11, verbose_name="手机号")
+
+
+# 订单类
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="用户")
+    goods = models.ManyToManyField("Good", related_name="商品")
+
+    def __str__(self):
+        return self.user.username + "的订单"
