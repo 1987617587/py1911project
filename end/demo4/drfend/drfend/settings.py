@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'shop',
     'rest_framework',
     'rest_framework_jwt',
+    'rest_framework_simplejwt',
+
 ]
 
 MIDDLEWARE = [
@@ -129,17 +131,35 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 4.simplejwt认证
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
         # 3.使用JWT认证 json web token 不属于在数据库中存放 通过特殊的加密算法进行加密
-        # 配置
+        # 配置因为现在不维护 出现问题 无法验证
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         # 2.cookie 和 session 认证(一般) cookie是存储在浏览器上的非敏感数据，session是存储在浏览器上的敏感数据
         # 发起请求时需要在cookie中携带sessionid  csrftoken 在header中 携带X-CSRFToken 这些值可以在浏览器登录之后的cookie中复制
+        # 需要在数据库生成一张表
         'rest_framework.authentication.SessionAuthentication',
         # 1.Basic认证(最简单)
         # 将请求中携带HTTP_AUTHORIZATION 的类似于basic特殊编码的字符串 进行解码得到相应的用户 然后对用户进行认证
+        # 每次登录需要登陆密码
         'rest_framework.authentication.BasicAuthentication'
     ],
 
-}
+    # 配置全局频次限制类
+    'DEFAULT_THROTTLE_CLASSES': [
+        # 'rest_framework.throttling.AnonRateThrottle',
+        # 'rest_framework.throttling.UserRateThrottle',
+    ],
+    # Throttling
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '5/minutes',
+        'anon': '1/minutes',
+    },
 
+}
+# 用户类
 AUTH_USER_MODEL = "shop.User"
+# 自定义认证类 应用名。文件名。认证类名
+AUTHENTICATION_BACKENDS = ['shop.authbackend.MyLoginBackend']

@@ -7,10 +7,12 @@ from rest_framework import viewsets, generics
 from rest_framework.decorators import api_view, action
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
 from . import permissions as mypermissions
 from .models import *
 from .serializers import *
+from rest_framework import throttling
 
 
 class CategoryViewSets(viewsets.ModelViewSet):
@@ -22,6 +24,7 @@ class CategoryViewSets(viewsets.ModelViewSet):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
 
 class GoodViewsSets(viewsets.ModelViewSet):
@@ -34,7 +37,7 @@ class GoodImagesViewsSets(viewsets.ModelViewSet):
     serializer_class = GoodImagesSerializer
 
 
-class UserViewsSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+class UserViewsSets1(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                      mixins.DestroyModelMixin):
     """
     声明用户操作  获取 添加 更新 删除
@@ -52,7 +55,7 @@ class UserViewsSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.U
         return Response(seria.data, status=status.HTTP_201_CREATED)
 
 
-class UserViewsSets1(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+class UserViewsSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin):
     """
     声明用户操作 获取 更新 删除

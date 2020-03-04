@@ -20,6 +20,8 @@ from django.views.static import serve
 
 from drfend.settings import MEDIA_ROOT
 from shop.views import *
+# 引rest_framework_simplejwt入路由
+from rest_framework_simplejwt.views import token_obtain_pair,token_refresh
 # 引入DRF自带的路由类
 from rest_framework import routers
 
@@ -34,6 +36,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('api/v1/', include(router.urls)),
     path('', include(router.urls)),
+
+    url(r'^token_login/$',token_obtain_pair,name='login'),
+    url(r'^refresh/$',token_refresh,name='refresh'),
 
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     # url(r'^category_list/$', category_list, name="category_list"),
