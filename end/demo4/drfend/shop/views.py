@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from rest_framework import mixins, permissions
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import mixins, permissions, filters
 
 from rest_framework import viewsets, generics
 from rest_framework.decorators import api_view, action
@@ -9,6 +10,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from rest_framework.views import APIView
+
+from shop.pagination import MyPagination
+from shop.throttling import MyAnon, MyUser
 from . import permissions as mypermissions
 from .models import *
 from .serializers import *
@@ -24,7 +28,30 @@ class CategoryViewSets(viewsets.ModelViewSet):
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    throttle_classes = [AnonRateThrottle, UserRateThrottle]
+
+    # 超级管理员才能创建分类 普通用户只能查看
+    def get_permissions(self):
+        if self.action == "create" or self.action == "update" or self.action == "partial_update" or \
+                self.action == "destory":
+            return [permissions.IsAdminUser()]  # 必须是超级管理员
+            # return [permissions.IsAuthenticatedOrReadOnly()]  # 未登录只读，登陆后可修改
+            # return [mypermissions.CategoryPermission()]  # 使用自定义权限类
+        else:
+            # return [permissions.IsAuthenticated()]
+            return []
+
+    # 控制访问频次
+    # throttle_classes = [AnonRateThrottle, UserRateThrottle]
+    throttle_classes = [MyAnon, MyUser]
+    # 设定分页
+    pagination_class = MyPagination
+    # 局部过滤配置
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['name']
+    # 局部搜索配置
+    search_fields = ["name"]
+    # 局部排序配置
+    ordering_fields = ["id"]
 
 
 class GoodViewsSets(viewsets.ModelViewSet):
