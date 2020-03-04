@@ -40,10 +40,13 @@ INSTALLED_APPS = [
     'rest_framework_jwt',
     'rest_framework_simplejwt',
     'django_filters',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
+    # 文件名 模块名 类名
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -174,3 +177,6 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = "shop.User"
 # 自定义认证类 应用名。文件名。认证类名
 AUTHENTICATION_BACKENDS = ['shop.authbackend.MyLoginBackend']
+
+# 允许跨域
+CORS_ORIGIN_ALLOW_ALL = True
