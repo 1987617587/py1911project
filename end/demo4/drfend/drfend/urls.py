@@ -17,11 +17,12 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.views.static import serve
+from rest_framework.documentation import include_docs_urls
 
 from drfend.settings import MEDIA_ROOT
 from shop.views import *
 # 引rest_framework_simplejwt入路由
-from rest_framework_simplejwt.views import token_obtain_pair,token_refresh
+from rest_framework_simplejwt.views import token_obtain_pair, token_refresh
 # 引入DRF自带的路由类
 from rest_framework import routers
 
@@ -36,9 +37,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('api/v1/', include(router.urls)),
     path('', include(router.urls)),
-
-    url(r'^token_login/$',token_obtain_pair,name='login'),
-    url(r'^refresh/$',token_refresh,name='refresh'),
+    url(r'^userinfo/$', getuserinfo, name='userinfo'),
+    url(r'^token_login/$', token_obtain_pair, name='login'),
+    url(r'^refresh/$', token_refresh, name='refresh'),
 
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     # url(r'^category_list/$', category_list, name="category_list"),
@@ -47,4 +48,6 @@ urlpatterns = [
     # url(r'^category_detail/(?P<pk>\d+)/$', CategoryDetailView.as_view(), name="category_detail"),
     # 为了在DRF路由调试页面 需要引入以下路由
     path('', include('rest_framework.urls')),
+    # API文档地址
+    path('docs/', include_docs_urls(title="RestFulAPI", description="RestFulAPI v1")),
 ]

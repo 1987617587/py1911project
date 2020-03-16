@@ -17,6 +17,22 @@ from . import permissions as mypermissions
 from .models import *
 from .serializers import *
 from rest_framework import throttling
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view(['GET'])
+def getuserinfo(request):
+    print("hello")
+    print(request)
+    print(request.headers["Authorization"])
+    user = JWTAuthentication().authenticate(request)
+    print("用户", user[0])
+    seria = UserSerializer(instance=user[0])
+    # seria.is_valid(raise_exception=True)
+    # print(seria.data)
+    return Response(seria.data, status=status.HTTP_200_OK)
 
 
 class CategoryViewSets(viewsets.ModelViewSet):
@@ -44,7 +60,7 @@ class CategoryViewSets(viewsets.ModelViewSet):
     # throttle_classes = [AnonRateThrottle, UserRateThrottle]
     throttle_classes = [MyAnon, MyUser]
     # 设定分页
-    pagination_class = MyPagination
+    # pagination_class = MyPagination
     # 局部过滤配置
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['name']
@@ -82,7 +98,8 @@ class UserViewsSets1(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.
         return Response(seria.data, status=status.HTTP_201_CREATED)
 
 
-class UserViewsSets(viewsets.GenericViewSet, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+class UserViewsSets(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
                     mixins.DestroyModelMixin):
     """
     声明用户操作 获取 更新 删除

@@ -186,7 +186,7 @@ class UserSerializer(serializers.ModelSerializer):
         "min_length": "最短不能小于2个字",
         "required": "用户名不能为空"
     }, help_text="请输入用户名", label="用户名")
-    password = serializers.CharField(max_length=20, min_length=2, error_messages={
+    password = serializers.CharField(max_length=20, min_length=2, write_only=True,error_messages={
         "max_length": "最长不能超过20个字",
         "min_length": "最短不能小于2个字",
         "required": "密码不能为空"
@@ -203,9 +203,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         # fields = ('','','')
         # 在fields写入想要显示的字段
-        fields = ('username', 'password', 'email')
+        # fields = ('username', 'password', 'email')
         # 在exclude写入不需要显示的字段
         # exclude =['','']
+        exclude = ["user_permissions","groups"]
+
 
     def validate(self, attrs):
         if attrs.get("password"):
