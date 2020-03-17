@@ -2,10 +2,13 @@ import sqlite3
 
 from flask import Blueprint, request
 from flask import render_template, request, flash
+from flask_mail import Message
 from werkzeug.utils import redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # 新建用户模块蓝图
+from .utils import mail
+
 user_bp = Blueprint("user", __name__)
 
 
@@ -42,7 +45,18 @@ def regist():
                     security_password = generate_password_hash(password)
                     cur.execute("insert into user (username,password) values (?,?)", (username, security_password))
                     con.commit()
-                    return redirect('/')
+
+                    # 发送邮件
+                    with sqlite3.connect("demo5.db") as con2:
+                        cur2 = con2.cursor()
+                        cur2.execute("select * from user where username = ?", (username,))
+                        r2 = cur2.fetchone()
+                        print(r2[0])
+
+                    msg = Message(subject="神秘组织激活邮件", recipients=[username])
+                    msg.html = "<a href='http://127.0.0.1/active/" + str(r2[0]) + "'>点击激活</a>"
+                    mail.send(msg)
+                    return redirect('/login')
                 error = "用户名已存在"
         if error:
             # flash(error, category=error)
@@ -78,8 +92,17 @@ def login():
                 if r:
                     print(r, r[2])
                     # 校验密码
-                    if check_password_hash( r[2],password):
+                    if check_password_hash(r[2], password):
                         print("找到用户")
+                        if r[5] == 0:
+                            error = "用户未激活，不能直接登录,请前往邮箱激活"
+                            flash({
+                                "error": error,
+                                "username": username,
+                                "password": password,
+                            })
+                            return redirect('/login')
+
                         return redirect('/')
 
                 error = "用户名或密码错误"
@@ -98,3 +121,14 @@ def login():
             return redirect('/login')
         # return render_template('booklist.html', booklist=["倚天屠龙记", "神雕侠侣", "天龙八部"], username=username)
         # return redirect('/')
+
+
+@user_bp.route("/active/<id>", methods=["GET", "POST"])
+def activeuser(id):
+    if request.method == "GET":
+        print(id)
+        with sqlite3.connect("demo5.db") as con:
+            cur = con.cursor()
+            cur.execute("update user set is_active = 1 where id = ?", (id,))
+            con.commit()
+        return redirect("/login")

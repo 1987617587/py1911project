@@ -33,6 +33,22 @@ def creat_app():
     def myupper(value):
         return value.upper()
 
+    # 邮箱配置
+    app.config["MAIL_SERVER"] = "smtp.163.com"
+    app.config["MAIL_PORT"] = 25
+
+    app.config["MAIL_USERNAME"] = "18137128152@163.com"
+    app.config["MAIL_PASSWORD"] = "qikuedu"
+    app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<18137128152@163.com>'
+    # app.config["MAIL_SERVER"] = "imap.qq.com"
+    # app.config["MAIL_PORT"] = 143
+    #
+    # app.config["MAIL_USERNAME"] = "1719866818@qq.com"
+    # app.config["MAIL_PASSWORD"] = "18272921148lz"
+    # app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<18137128152@163.com>'
+    # 扩展工厂 关联邮件
+    mail.init_app(app)
+
     # 注册蓝图
     app.register_blueprint(user_bp)
     app.register_blueprint(books_bp)
@@ -49,7 +65,7 @@ def creat_app():
     #             "CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT,"
     #             "username TEXT UNIQUE NOT NULL,password TEXT NOT NULL,"
     #             "created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
-    #             "is_admin INTEGER DEFAULT 0, is_active INTEGER DEFAULT 1 )")
+    #             "is_admin INTEGER DEFAULT 0, is_active INTEGER DEFAULT 0 )")
     #         con.commit()
     #         cur.close()
     #         con.close()
