@@ -5,10 +5,11 @@
 
 {% block main %}
 <form class="form-horizontal" action="#" method="post">
+        {% with info = get_flashed_messages() %}
     <div class="form-group">
         <label for="username" class="col-sm-2 control-label">用户名</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username">
+            <input type="text" class="form-control" id="username" placeholder="请输入用户名" name="username" value="{{info[0].username}}" >
         </div>
     </div>
     <div class="form-group">
@@ -26,17 +27,13 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            {% for error in get_flashed_messages() %}
-            {% if error %}
-
             <label>
-                <p class="text-danger"> {{error}}</p>
+                <p class="text-danger"> {{info[0].error}}</p>
             </label>
-            {% endif %}
-            {% endfor %}
+      </div>
+   </div>
+        {% endwith %}
 
-        </div>
-    </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit"  class="btn btn-link">注册</button>

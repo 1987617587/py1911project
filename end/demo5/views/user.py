@@ -3,6 +3,7 @@ import sqlite3
 from flask import Blueprint, request
 from flask import render_template, request, flash
 from werkzeug.utils import redirect
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # 新建用户模块蓝图
 user_bp = Blueprint("user", __name__)
@@ -12,6 +13,9 @@ user_bp = Blueprint("user", __name__)
 def regist():
     if request.method == "GET":
         # return "请先登录"
+        flash({
+
+        })
         return render_template('regist.html')
     if request.method == "POST":
         username = request.form.get("username")
@@ -34,12 +38,18 @@ def regist():
                 print(r)
                 if len(r) == 0:
                     print("可以创建")
-                    cur.execute("insert into user (username,password) values (?,?)", (username, password))
+                    # 密码加密
+                    security_password = generate_password_hash(password)
+                    cur.execute("insert into user (username,password) values (?,?)", (username, security_password))
                     con.commit()
                     return redirect('/')
                 error = "用户名已存在"
         if error:
-            flash(error, category=error)
+            # flash(error, category=error)
+            flash({
+                "error": error,
+                "username": username
+            })
             return redirect('/regist')
 
 
@@ -67,7 +77,8 @@ def login():
                 r = cur.fetchone()
                 if r:
                     print(r, r[2])
-                    if password == r[2]:
+                    # 校验密码
+                    if check_password_hash( r[2],password):
                         print("找到用户")
                         return redirect('/')
 
