@@ -2,6 +2,8 @@
 flask:应用工厂，负责应用相关所有的内容
 
 """
+import sqlite3
+
 from flask import render_template, request, flash
 from werkzeug.utils import redirect
 
@@ -35,4 +37,25 @@ def creat_app():
     app.register_blueprint(user_bp)
     app.register_blueprint(books_bp)
     app.register_blueprint(get404_bp)
+
+    # @app.before_first_request
+    # def first_request_do_something():
+    #     print("这是第一次请求，创建数据库")
+    #     try:
+    #         con = sqlite3.connect("demo5.db")
+    #         cur = con.cursor()
+    #         cur.execute("DROP TABLE IF EXISTS user;")
+    #         cur.execute(
+    #             "CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT,"
+    #             "username TEXT UNIQUE NOT NULL,password TEXT NOT NULL,"
+    #             "created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+    #             "is_admin INTEGER DEFAULT 0, is_active INTEGER DEFAULT 1 )")
+    #         con.commit()
+    #         cur.close()
+    #         con.close()
+    #     except:
+    #         print("出错了")
+    #
+    #     return "这是第一次请求"
+
     return app
