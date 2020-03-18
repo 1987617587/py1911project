@@ -29,22 +29,36 @@ def creat_app():
     def page_not_found(error):
         return render_template("404.html")
 
+    # @app.route("/active/<int:id>", methods=["GET"])
+    # def activeuser(id):
+    #     # if request.method == "GET":
+    #     print(id)
+    #     # with sqlite3.connect("demo5.db") as con:
+    #     #     cur = con.cursor()
+    #     #     cur.execute("update user set is_active = 1 where id = ?", (id,))
+    #     #     con.commit()
+    #     return redirect("/login")
+
     @app.template_filter(name="myupper")
     def myupper(value):
         return value.upper()
 
     # 邮箱配置
+
     app.config["MAIL_SERVER"] = "smtp.163.com"
     app.config["MAIL_PORT"] = 25
 
-    app.config["MAIL_USERNAME"] = "18137128152@163.com"
-    app.config["MAIL_PASSWORD"] = "qikuedu"
-    app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<18137128152@163.com>'
+    app.config["MAIL_USERNAME"] = "18336068360@163.com"
+    app.config["MAIL_PASSWORD"] = "UMGMFZEQRXCDSFAN"
+    app.config['MAIL_DEFAULT_SENDER'] = '确认加入神秘组织<18336068360@163.com>'
+    # 自己的
     # app.config["MAIL_SERVER"] = "imap.qq.com"
+    # # app.config["MAIL_SERVER"] = "smtp.qq.com"
     # app.config["MAIL_PORT"] = 143
+    # app.config["MAIL_USE_SSL "] = True
     #
     # app.config["MAIL_USERNAME"] = "1719866818@qq.com"
-    # app.config["MAIL_PASSWORD"] = "18272921148lz"
+    # app.config["MAIL_PASSWORD"] = "arnongwkfnlocdec"
     # app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<18137128152@163.com>'
     # 扩展工厂 关联邮件
     mail.init_app(app)
@@ -73,5 +87,7 @@ def creat_app():
     #         print("出错了")
     #
     #     return "这是第一次请求"
+
+
 
     return app

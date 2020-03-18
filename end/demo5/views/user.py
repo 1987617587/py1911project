@@ -41,21 +41,24 @@ def regist():
                 print(r)
                 if len(r) == 0:
                     print("可以创建")
-                    # 密码加密
-                    security_password = generate_password_hash(password)
-                    cur.execute("insert into user (username,password) values (?,?)", (username, security_password))
-                    con.commit()
-
-                    # 发送邮件
-                    with sqlite3.connect("demo5.db") as con2:
-                        cur2 = con2.cursor()
-                        cur2.execute("select * from user where username = ?", (username,))
-                        r2 = cur2.fetchone()
+                    try:
+                        # 密码加密
+                        security_password = generate_password_hash(password)
+                        cur.execute("insert into user (username,password) values (?,?)", (username, security_password))
+                        cur.execute("select * from user where username = ?", (username,))
+                        r2 = cur.fetchone()
                         print(r2[0])
+                        # 发送邮件
+                        msg = Message(subject="神秘组织激活邮件", recipients=[username])
+                        msg.html = "<a href='http://127.0.0.1:5000/active/" + str(r2[0]) + "'>点击激活</a>"
+                        mail.send(msg)
+                        # 发送邮件成功再提交
+                        con.commit()
 
-                    msg = Message(subject="神秘组织激活邮件", recipients=[username])
-                    msg.html = "<a href='http://127.0.0.1/active/" + str(r2[0]) + "'>点击激活</a>"
-                    mail.send(msg)
+                    except:
+
+                        return "出现异常"
+
                     return redirect('/login')
                 error = "用户名已存在"
         if error:
@@ -123,9 +126,9 @@ def login():
         # return redirect('/')
 
 
-@user_bp.route("/active/<id>", methods=["GET", "POST"])
+@user_bp.route("/active/<int:id>", methods=["GET"])
 def activeuser(id):
-    if request.method == "GET":
+    # if request.method == "GET":
         print(id)
         with sqlite3.connect("demo5.db") as con:
             cur = con.cursor()
