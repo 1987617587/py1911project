@@ -55,10 +55,12 @@ def regist():
                         seria_util = TimedJSONWebSignatureSerializer(current_app.secret_key, expires_in=3600)
                         serstr = seria_util.dumps({"id": r2[0]}).decode("utf-8")
 
-                        msg = Message(subject="神秘组织激活邮件", recipients=[username])
-                        # msg.html = "<a href='http://127.0.0.1:5000/active/" + str(r2[0]) + "'>点击激活</a>"
-                        msg.html = "<a href='http://127.0.0.1:5000/active/%s'>点击激活</a>" % (serstr,)
-                        mail.send(msg)
+                        # msg = Message(subject="神秘组织激活邮件", recipients=[username])
+                        # # msg.html = "<a href='http://127.0.0.1:5000/active/" + str(r2[0]) + "'>点击激活</a>"
+                        # msg.html = "<a href='http://127.0.0.1:5000/active/%s'>点击激活</a>" % (serstr,)
+                        # mail.send(msg)
+                        from tasks import sendmail
+                        sendmail.delay(username, serstr)
                         # 发送邮件成功再提交
                         con.commit()
                     # 邮箱发送失败，不写入数据库
