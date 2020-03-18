@@ -1,6 +1,7 @@
 import sqlite3
+from itsdangerous import TimedJSONWebSignatureSerializer, SignatureExpired, BadSignature
 
-from flask import Blueprint, request
+from flask import Blueprint, request, current_app
 from flask import render_template, request, flash
 from flask_mail import Message
 from werkzeug.utils import redirect
@@ -49,14 +50,21 @@ def regist():
                         r2 = cur.fetchone()
                         print(r2[0])
                         # 发送邮件
+                        # 邮箱加密 密钥使用自动产生的密钥
+                        print(current_app.secret_key)
+                        seria_util = TimedJSONWebSignatureSerializer(current_app.secret_key, expires_in=3600)
+                        serstr = seria_util.dumps({"id": r2[0]}).decode("utf-8")
+
                         msg = Message(subject="神秘组织激活邮件", recipients=[username])
-                        msg.html = "<a href='http://127.0.0.1:5000/active/" + str(r2[0]) + "'>点击激活</a>"
+                        # msg.html = "<a href='http://127.0.0.1:5000/active/" + str(r2[0]) + "'>点击激活</a>"
+                        msg.html = "<a href='http://127.0.0.1:5000/active/%s'>点击激活</a>" % (serstr,)
                         mail.send(msg)
                         # 发送邮件成功再提交
                         con.commit()
-
-                    except:
-
+                    # 邮箱发送失败，不写入数据库
+                    except Exception as e:
+                        print(e)
+                        con.rollback()
                         return "出现异常"
 
                     return redirect('/login')
@@ -126,12 +134,22 @@ def login():
         # return redirect('/')
 
 
-@user_bp.route("/active/<int:id>", methods=["GET"])
-def activeuser(id):
-    # if request.method == "GET":
+@user_bp.route("/active/<serstr>", methods=["GET"])
+def activeuser(serstr):
+    # 解密
+    try:
+        seria_util = TimedJSONWebSignatureSerializer(current_app.secret_key)
+        obj = seria_util.loads(serstr)
+        print(obj["id"])
+        id = obj["id"]
         print(id)
         with sqlite3.connect("demo5.db") as con:
             cur = con.cursor()
             cur.execute("update user set is_active = 1 where id = ?", (id,))
             con.commit()
         return redirect("/login")
+
+    except SignatureExpired as e:
+        print(e, "过期了")
+    except BadSignature as e:
+        print(e, "密钥错误")

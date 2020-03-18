@@ -44,6 +44,7 @@ def creat_app():
         return value.upper()
 
     # 邮箱配置
+    # 网易的
 
     app.config["MAIL_SERVER"] = "smtp.163.com"
     app.config["MAIL_PORT"] = 25
@@ -51,15 +52,14 @@ def creat_app():
     app.config["MAIL_USERNAME"] = "18336068360@163.com"
     app.config["MAIL_PASSWORD"] = "UMGMFZEQRXCDSFAN"
     app.config['MAIL_DEFAULT_SENDER'] = '确认加入神秘组织<18336068360@163.com>'
-    # 自己的
-    # app.config["MAIL_SERVER"] = "imap.qq.com"
-    # # app.config["MAIL_SERVER"] = "smtp.qq.com"
-    # app.config["MAIL_PORT"] = 143
+    # qq的
+    # app.config["MAIL_SERVER"] = "smtp.qq.com"
+    # app.config["MAIL_PORT"] = 465
     # app.config["MAIL_USE_SSL "] = True
     #
     # app.config["MAIL_USERNAME"] = "1719866818@qq.com"
     # app.config["MAIL_PASSWORD"] = "arnongwkfnlocdec"
-    # app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<18137128152@163.com>'
+    # app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<1719866818@qq.com>'
     # 扩展工厂 关联邮件
     mail.init_app(app)
 
