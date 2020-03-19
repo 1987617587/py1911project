@@ -1,13 +1,15 @@
+import datetime
 import sqlite3
 from itsdangerous import TimedJSONWebSignatureSerializer, SignatureExpired, BadSignature
 
-from flask import Blueprint, request, current_app
+from flask import Blueprint, request, current_app, make_response, session
 from flask import render_template, request, flash
 from flask_mail import Message
 from werkzeug.utils import redirect
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # 新建用户模块蓝图
+from models import *
 from .utils import mail
 
 user_bp = Blueprint("user", __name__)
@@ -107,16 +109,29 @@ def login():
                     # 校验密码
                     if check_password_hash(r[2], password):
                         print("找到用户")
-                        if r[5] == 0:
-                            error = "用户未激活，不能直接登录,请前往邮箱激活"
-                            flash({
-                                "error": error,
-                                "username": username,
-                                "password": password,
-                            })
-                            return redirect('/login')
-
-                        return redirect('/')
+                        # if r[5] == 0:
+                        #     error = "用户未激活，不能直接登录,请前往邮箱激活"
+                        #     flash({
+                        #         "error": error,
+                        #         "username": username,
+                        #         "password": password,
+                        #     })
+                        #     return redirect('/login')
+                        # return redirect('/')
+                        # 登录成功，写入cookie
+                        next = request.args.get("next")
+                        if next:
+                            res = make_response(redirect(next))
+                            # res.set_cookie("user", username,
+                            #                expires=datetime.datetime.now() + datetime.timedelta(days=7))
+                            session["user"] = username
+                            return res
+                        # res = make_response("直接进入首页登陆成功")
+                        res = make_response(redirect("/"))
+                        # res.set_cookie("user", username,
+                        #                expires=datetime.datetime.now() + datetime.timedelta(days=7))
+                        session["user"] = username
+                        return res
 
                 error = "用户名或密码错误"
         # 需要在本次请求中将信息写入session （前提必须配置secret_key）
@@ -140,7 +155,7 @@ def login():
 def activeuser(serstr):
     # 解密
     try:
-        seria_util = TimedJSONWebSignatureSerializer(current_app.secret_key)
+        seria_util = TimedJSONWebSignatureSerializer(current_app.secret_key, expires_in=300)
         obj = seria_util.loads(serstr)
         print(obj["id"])
         id = obj["id"]
@@ -155,3 +170,13 @@ def activeuser(serstr):
         print(e, "过期了")
     except BadSignature as e:
         print(e, "密钥错误")
+
+
+@user_bp.route("/loginout", methods=["GET", "POST"])
+def loginout():
+    res = make_response(redirect("/"))
+    # res.delete_cookie("user")
+    session.pop("user")
+    return res
+
+

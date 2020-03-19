@@ -13,6 +13,7 @@ from flask import Flask
 # from views.book import books_bp
 # from views.other import get404_bp
 # from views.user import user_bp
+from models import db
 from views import *
 
 
@@ -46,23 +47,23 @@ def creat_app():
     # 邮箱配置
     # 网易的
 
-    # app.config["MAIL_SERVER"] = "smtp.163.com"
-    # app.config["MAIL_PORT"] = 25
-    #
-    # app.config["MAIL_USERNAME"] = "18336068360@163.com"
-    # app.config["MAIL_PASSWORD"] = "UMGMFZEQRXCDSFAN"
-    # app.config['MAIL_DEFAULT_SENDER'] = '确认加入神秘组织<18336068360@163.com>'
-    # qq的
-    app.config["MAIL_SERVER"] = "smtp.qq.com"
-    # 端口号465或587
-    app.config["MAIL_PORT"] = 587
-    app.config["MAIL_USE_SSL "] = True
-    app.config["MAIL_USE_TLS "] = False
-    app.config["MAIL_DEBUG "] = True
+    app.config["MAIL_SERVER"] = "smtp.163.com"
+    app.config["MAIL_PORT"] = 25
 
-    app.config["MAIL_USERNAME"] = "1987617587@qq.com"
-    app.config["MAIL_PASSWORD"] = "plvhsqynyvexbdfe"
-    app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<1987617587@qq.com>'
+    app.config["MAIL_USERNAME"] = "18336068360@163.com"
+    app.config["MAIL_PASSWORD"] = "UMGMFZEQRXCDSFAN"
+    app.config['MAIL_DEFAULT_SENDER'] = '确认加入神秘组织<18336068360@163.com>'
+    # qq的
+    # app.config["MAIL_SERVER"] = "smtp.qq.com"
+    # # 端口号465或587
+    # app.config["MAIL_PORT"] = 587
+    # app.config["MAIL_USE_SSL "] = True
+    # app.config["MAIL_USE_TLS "] = False
+    # app.config["MAIL_DEBUG "] = True
+    #
+    # app.config["MAIL_USERNAME"] = "1987617587@qq.com"
+    # app.config["MAIL_PASSWORD"] = "plvhsqynyvexbdfe"
+    # app.config['MAIL_DEFAULT_SENDER'] = '老张大讲堂<1987617587@qq.com>'
     # 扩展工厂 关联邮件
     mail.init_app(app)
 
@@ -70,6 +71,7 @@ def creat_app():
     app.register_blueprint(user_bp)
     app.register_blueprint(books_bp)
     app.register_blueprint(get404_bp)
+    app.register_blueprint(admin_bp)
 
     # @app.before_first_request
     # def first_request_do_something():
@@ -91,5 +93,12 @@ def creat_app():
     #
     #     return "这是第一次请求"
 
+    # 配置数据库
+    app.config['SQLALCHEMY_ECHO'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///demo5.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.init_app(app)
+    db.app = app
 
     return app
