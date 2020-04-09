@@ -20,4 +20,5 @@ class JobspiderItem(scrapy.Item):
     salary = scrapy.Field()
     # 发布时间
     pud_date = scrapy.Field()
-
+    # 岗位要求
+    job_msg = scrapy.Field()

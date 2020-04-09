@@ -70,8 +70,10 @@ ROBOTSTXT_OBEY = False
 # 启用管道
 ITEM_PIPELINES = {
     # 可以设定管道优先级
-   'JobSpider.pipelines.JobspiderPipeline': 300,
-   'JobSpider.pipelines.JobspiderMysqlPipeline': 200,
+   # 'JobSpider.pipelines.JobspiderPipeline': 300,
+   # 'JobSpider.pipelines.JobspiderMysqlPipeline': 400,
+   'JobSpider.pipelines.JobspiderExclePipeline': 500,
+   # 'JobSpider.pipelines.JobspiderJsonPipeline': 600,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

@@ -75,12 +75,12 @@ class PythonpositionSpider(scrapy.Spider):
             item['city']=city
             item['salary']=salary
             item['pud_date']=pud_date
-            # 把提交给管道pipeline
-            yield item
+
             # 试试详情 生成请求对象
 
             detail_url = each.xpath('.//p/span/a/@href').extract()[0].strip()
             req = scrapy.Request(detail_url, callback=self.parse_detail)
+            req.meta['item'] = item
             # 使用yield 把请求对象发送给scheduler,放入请求等待队列
             yield req
 
@@ -116,4 +116,20 @@ class PythonpositionSpider(scrapy.Spider):
         '''
         print('parse_detail函数执行了')
         print(response.url)
+
+        # 职位说明
+        job_msg_list = response.xpath('//div[contains(@class,"job_msg")]/p')
+        print(f'len:{len(job_msg_list)}')
+        str_msg = ''
+        for job_msg in job_msg_list:
+            job_msg = job_msg.xpath('./text()')
+            if job_msg:
+                job_msg = job_msg.extract()[0].strip()
+                print(f'job_msg:{job_msg}')
+                str_msg +=job_msg
+
+        item = response.meta['item']
+        item['job_msg'] = str_msg
+        # 把提交给管道pipeline
+        yield item
 
